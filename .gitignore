@@ -6,9 +6,6 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-# Diagnostic reports (https://nodejs.org/api/report.html)
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
-
 # Runtime data
 pids
 *.pid
@@ -25,21 +22,8 @@ coverage
 # nyc test coverage
 .nyc_output
 
-# Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
-.grunt
-
-# Bower dependency directory (https://bower.io/)
-bower_components
-
-# node-waf configuration
-.lock-wscript
-
-# Compiled binary addons (https://nodejs.org/api/addons.html)
-build/Release
-
 # Dependency directories
 node_modules/
-jspm_packages/
 
 # TypeScript v1 declaration files
 typings/
@@ -75,30 +59,33 @@ typings/
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 
-# Next.js build output
-.next
-
-# Nuxt.js build / generate output
-.nuxt
+# Generate output
 dist
 
-# Gatsby files
-.cache/
-# Comment in the public line in if your project uses Gatsby and *not* Next.js
-# https://nextjs.org/blog/next-9-1#public-directory-support
-# public
+### vscode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
 
-# vuepress build output
-.vuepress/dist
+### Windows ###
+# Windows thumbnail cache files
+Thumbs.db
+Thumbs.db:encryptable
 
-# Serverless directories
-.serverless/
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
 
-# FuseBox cache
-.fusebox/
+### Linux ###
+*~
 
-# DynamoDB Local files
-.dynamodb/
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
 
-# TernJS port file
-.tern-port
+# KDE directory preferences
+.directory
