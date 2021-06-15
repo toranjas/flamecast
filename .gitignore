@@ -37,6 +37,10 @@ typings/
 # Optional eslint cache
 .eslintcache
 
+# production
+/build
+/out
+
 # Microbundle cache
 .rpt2_cache/
 .rts2_cache_cjs/
@@ -51,10 +55,6 @@ typings/
 
 # Yarn Integrity file
 .yarn-integrity
-
-# dotenv environment variables file
-.env
-.env.test
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
