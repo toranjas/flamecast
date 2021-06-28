@@ -9,7 +9,7 @@ import {
   Flex,
   Text,
   Box
-} from "@chakra-ui/react"
+} from '@chakra-ui/react';
 
 function App() {
   return (
@@ -28,7 +28,7 @@ function App() {
         <FormControl id="email">
           <FormLabel>Email address</FormLabel>
           <Input type="email" />
-          <FormHelperText>We'll never share your email.</FormHelperText>
+          <FormHelperText>{'We\'ll never share your email.'}</FormHelperText>
         </FormControl>
       </Box>
     </Flex>
