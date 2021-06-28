@@ -1,5 +1,5 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 import {
   Input,
   FormControl,
@@ -8,13 +8,12 @@ import {
   Heading,
   Flex,
   Text,
-  Box
-} from '@chakra-ui/react';
+  Box,
+} from "@chakra-ui/react";
 
 function App() {
   return (
     <Flex color="white" h="100%">
-
       <Box w="70px" bg="gray.700">
         <Text>Tool</Text>
       </Box>
@@ -28,7 +27,7 @@ function App() {
         <FormControl id="email">
           <FormLabel>Email address</FormLabel>
           <Input type="email" />
-          <FormHelperText>{'We\'ll never share your email.'}</FormHelperText>
+          <FormHelperText>{"We'll never share your email."}</FormHelperText>
         </FormControl>
       </Box>
     </Flex>
