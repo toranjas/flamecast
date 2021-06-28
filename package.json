@@ -1,7 +1,7 @@
 {
   "name": "flamecast",
   "version": "0.1.0",
-  "main": "public/electron.js",
+  "main": "public/electron.ts",
   "homepage": "./",
   "private": true,
   "dependencies": {
@@ -16,7 +16,8 @@
     "framer-motion": "^4.1.17",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "typescript": "^4.3.4"
   },
   "scripts": {
     "dev": "concurrently -k \"npm start\" \"npm:electron\"",
@@ -48,6 +49,11 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.52",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.52",
     "@electron-forge/maker-zip": "^6.0.0-beta.52",
+    "@types/electron-devtools-installer": "^2.2.0",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.12.5",
+    "@types/react": "^16.14.8",
+    "@types/react-dom": "^16.9.13",
     "concurrently": "^5.2.0",
     "electron": "^9.1.1",
     "electron-devtools-installer": "^3.1.1",
