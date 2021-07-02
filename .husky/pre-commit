@@ -1,0 +1,4 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+git rev-parse -q --no-revs --verify MERGE_HEAD || npm run lint-staged

@@ -16,7 +16,7 @@
     "lint": "eslint --ext .ts,.tsx,.js .",
     "lint:fix": "eslint --ext .ts,.tsx,.js . --fix .",
     "prettify": "prettier --write .",
-    "aaa": "lint-staged"
+    "lint-staged": "lint-staged"
   },
   "lint-staged": {
     "*.(ts|tsx|js|html|css|json)": [
