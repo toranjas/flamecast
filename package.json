@@ -13,16 +13,7 @@
     "test": "react-scripts test",
     "package": "react-scripts build && electron-forge package",
     "make": "react-scripts build && electron-forge make",
-    "lint-staged": "eslint . --fix ."
-  },
-  "lint-staged": {
-    "*.{ts,tsx,js}": [
-      "npm run lint-staged",
-      "prettier --write . --ignore-unknown"
-    ],
-    "*.{json,html,css,scss}": [
-      "prettier --write . --ignore-unknown"
-    ]
+    "lint-staged": "eslint --ext .ts,.tsx,.js . --fix . && prettier --write . --ignore-unknown",
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -59,7 +50,6 @@
     "electron": "^9.1.1",
     "electron-devtools-installer": "^3.1.1",
     "husky": "^6.0.0",
-    "lint-staged": "^11.0.0",
     "prettier": "^2.3.2",
     "wait-on": "^5.1.0"
   },
