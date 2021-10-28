@@ -1,0 +1,12 @@
+{
+  "name": "flamecast",
+  "version": "0.0.1",
+  "main": "output/main.js",
+  "private": true,
+  "dependencies": {
+    "@electron/remote": "1.2.0"
+  },
+  "devDependencies": {
+    "electron-devtools-installer": "^3.2.0"
+  }
+}
