@@ -16,8 +16,8 @@ import {
 import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-// // Services
-import StorageProvider from 'src/app/shared/services/storage-providers/StorageProvider';
+// Services
+import StorageProvider from '../../shared/services/storage-providers/StorageProvider';
 
 // Actions
 import { 
@@ -30,6 +30,7 @@ import {
 import { Episode } from '../episode.models';
 import { selectEpisodeState } from './episode.selectors';
 import { episodeHasChanges } from '../episode.utils';
+
 
 @Injectable()
 export class EpisodeEffects {
