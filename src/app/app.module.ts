@@ -27,6 +27,7 @@ import { ElectronFileSystemStorageProviderService } from './shared/services/stor
 import { metaReducers } from './shared/store/metaReducers';
 import { reducers } from './shared/store/reducers';
 import { effects } from './shared/store/effects';
+import storageProviderFactory from './shared/services/storage-providers/storage-provider-factory';
 
 
 // AoT requires an exported function for factories
@@ -59,7 +60,7 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
     }),
   ],
   providers: [
-    { provide: 'StorageProvider', useClass: ElectronFileSystemStorageProviderService}
+    { provide: 'StorageProvider', useFactory: storageProviderFactory}
   ],
   bootstrap: [AppComponent]
 })
