@@ -56,3 +56,6 @@ try {
   // Catch Error
   // throw e;
 }
+
+import { initializeFileSystemHandlers } from './file-system';
+initializeFileSystemHandlers();
