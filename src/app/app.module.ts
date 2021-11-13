@@ -16,8 +16,18 @@ import { DetailModule } from './detail/detail.module';
 
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { APP_CONFIG } from '../environments/environment';
+
+// FlameCast Storage Providers
+import { ElectronFileSystemStorageProviderService } from './shared/services/storage-providers/electron-file-system-storage-provider.service';
+
+// FlameCast NgRx
+import { metaReducers } from './shared/store/metaReducers';
+import { reducers } from './shared/store/reducers';
+import { effects } from './shared/store/effects';
+
 
 // AoT requires an exported function for factories
 const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
@@ -41,13 +51,16 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
         deps: [HttpClient]
       }
     }),
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot(effects),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: APP_CONFIG.production,
     }),
   ],
-  providers: [],
+  providers: [
+    { provide: 'StorageProvider', useClass: ElectronFileSystemStorageProviderService}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
