@@ -1,0 +1,29 @@
+@import "./fragments/reset";
+@import "./fragments/colors";
+@import "./fragments/typography";
+
+html {
+  /* 10px */
+  font-size: 62.5%;
+}
+
+body {
+  /* 16px */
+  font-size: 1.6rem;
+}
+
+html,
+body {
+  height: 100vh;
+  color: var(--text-color);
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

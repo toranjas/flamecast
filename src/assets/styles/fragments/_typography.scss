@@ -1,0 +1,68 @@
+@import "@fontsource/noto-sans/latin-400.css";
+@import "@fontsource/noto-sans/latin-700.css";
+
+.fc-display {
+  font-family: "Noto Sans", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 3.6rem;
+  letter-spacing: -0.02em;
+}
+
+.fc-header-1 {
+  font-family: "Noto Sans", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 2.1rem;
+  letter-spacing: -0.02em;
+}
+
+.fc-header-2 {
+  font-family: "Noto Sans", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+.fc-menu-item {
+  font-family: "Noto Sans", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.fc-body {
+  font-family: "Noto Sans", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+}
+
+.fc-description {
+  font-family: "Noto Sans", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.2px;
+  letter-spacing: 0.02em;
+}
+
+.fc-cta {
+  font-family: "Noto Sans", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+.fc-link {
+  font-family: "Noto Sans", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--link-color);
+  text-decoration-line: underline;
+}
+.fc-link:hover {
+  color: var(--link-color-hover);
+}

@@ -1,0 +1,19 @@
+:root {
+  --slate-level0: #202225;
+  --slate-level1: #2F3136;
+  --slate-level2: #36393F;
+  --white-level0: #FFFFFF;
+  --white-level1: #B9BBBE;
+  --primary-level0: #5865F2;
+  --primary-level1: #4752C4;
+  --primary-accent: #4D9CF6;
+  --danger-level0: #ED4245;
+  --danger-level1: #C63739;
+
+  // Text Colors
+  --text-color: var(--white-level0);
+
+  // Link Colors
+  --link-color: var(--primary-accent);
+  --link-color-hover: var(--primary-level0);
+}

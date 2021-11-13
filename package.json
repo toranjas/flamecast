@@ -38,6 +38,7 @@
     "@angular/platform-browser-dynamic": "12.1.2",
     "@angular/router": "12.1.2",
     "@electron/remote": "1.2.0",
+    "@fontsource/noto-sans": "4.5.1",
     "@ngrx/effects": "12.4.0",
     "@ngrx/store": "12.4.0",
     "@ngrx/store-devtools": "12.4.0",
