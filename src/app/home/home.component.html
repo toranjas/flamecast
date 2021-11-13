@@ -11,5 +11,19 @@
     <div class="fc-description">Description</div>
 
     <a routerLink="/detail" class="fc-link">{{ 'PAGES.HOME.GO_TO_DETAIL' | translate }}</a>
+
+    <div class="p-field">
+      <label for="username1">Example Field</label>
+      <input id="username1" class="p-inputtext-lg" aria-describedby="username1-help" pInputText [(ngModel)]="value4" />
+      <small id="username1-help">This is an example field</small>
+    </div>
+
+    <div class="p-field-checkbox">
+      <p-checkbox binary="true" inputId="checkExample"></p-checkbox>
+      <label for="checkExample">Check if you are awesome</label>
+    </div>
+
+    <button pButton pRipple type="button" label="Primary" class="p-button-rounded p-button-lg"></button>
+    <button pButton pRipple type="button" label="Secondary" class="p-button-rounded p-button-lg p-button-outlined p-button-secondary"></button>
   </div>
 </app-full-page>
