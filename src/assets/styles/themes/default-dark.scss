@@ -252,7 +252,7 @@
   padding: .35rem 1.05rem;
   margin-right: .7rem;
   background: rgba(158, 173, 230, .16);
-  color: 9eade6;
+  color: #9eade6;
   border-radius: 6px
 }
 
@@ -296,7 +296,7 @@ p-autocomplete.ng-dirty.ng-invalid>.p-autocomplete>.p-inputtext {
 }
 
 .p-autocomplete-panel .p-autocomplete-items .p-autocomplete-item.p-highlight {
-  color: 9eade6;
+  color: #9eade6;
   background: rgba(158, 173, 230, .16)
 }
 
@@ -418,7 +418,7 @@ p-calendar.ng-dirty.ng-invalid>.p-calendar>.p-inputtext {
 }
 
 .p-datepicker table td>span.p-highlight {
-  color: 9eade6;
+  color: #9eade6;
   background: rgba(158, 173, 230, .16)
 }
 
@@ -623,7 +623,7 @@ p-calendar.ng-dirty.ng-invalid>.p-calendar>.p-inputtext {
 }
 
 .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item.p-highlight {
-  color: 9eade6;
+  color: #9eade6;
   background: rgba(158, 173, 230, .16)
 }
 
@@ -738,7 +738,7 @@ p-checkbox.ng-dirty.ng-invalid>.p-checkbox>.p-checkbox-box {
   padding: .35rem 1.05rem;
   margin-right: .7rem;
   background: rgba(158, 173, 230, .16);
-  color: 9eade6;
+  color: #9eade6;
   border-radius: 6px
 }
 
@@ -1329,7 +1329,7 @@ p-inputswitch.ng-dirty.ng-invalid>.p-inputswitch {
 }
 
 .p-listbox .p-listbox-list .p-listbox-item.p-highlight {
-  color: 9eade6;
+  color: #9eade6;
   background: rgba(158, 173, 230, .16)
 }
 
@@ -1397,7 +1397,7 @@ p-listbox.ng-dirty.ng-invalid>.p-listbox {
   padding: .35rem 1.05rem;
   margin-right: .7rem;
   background: rgba(158, 173, 230, .16);
-  color: 9eade6;
+  color: #9eade6;
   border-radius: 6px
 }
 
@@ -2775,7 +2775,7 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
   height: 1.143rem;
   min-width: 1.143rem;
   line-height: 1.143rem;
-  color: 9eade6;
+  color: #9eade6;
   background: rgba(158, 173, 230, .16);
   margin-left: .7rem
 }
@@ -3057,7 +3057,7 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
 .p-column-filter-menu-button.p-column-filter-menu-button-active,
 .p-column-filter-menu-button.p-column-filter-menu-button-active:hover {
   background: rgba(158, 173, 230, .16);
-  color: 9eade6
+  color: #9eade6
 }
 
 .p-column-filter-menu-button:focus {
@@ -3112,7 +3112,7 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
 }
 
 .p-column-filter-overlay .p-column-filter-row-items .p-column-filter-row-item.p-highlight {
-  color: 9eade6;
+  color: #9eade6;
   background: rgba(158, 173, 230, .16)
 }
 
@@ -3228,7 +3228,7 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
 }
 
 .fc.fc-unthemed .fc-toolbar .fc-button .fc-icon-chevron-left {
-  font-family: "PrimeIcons" !important;
+  font-family: "PrimeIcons", sans-serif !important;
   text-indent: 0;
   font-size: 1.4rem
 }
@@ -3238,7 +3238,7 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
 }
 
 .fc.fc-unthemed .fc-toolbar .fc-button .fc-icon-chevron-right {
-  font-family: "PrimeIcons" !important;
+  font-family: "PrimeIcons", sans-serif !important;
   text-indent: 0;
   font-size: 1.4rem
 }
@@ -3275,7 +3275,7 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
 .fc.fc-unthemed .fc-toolbar .fc-button.fc-timeGridDay-button.fc-button-active {
   background: rgba(158, 173, 230, .16);
   border-color: rgba(158, 173, 230, .16);
-  color: 9eade6
+  color: #9eade6
 }
 
 .fc.fc-unthemed .fc-toolbar .fc-button.fc-dayGridMonth-button.fc-button-active:hover,
@@ -3283,7 +3283,7 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
 .fc.fc-unthemed .fc-toolbar .fc-button.fc-timeGridDay-button.fc-button-active:hover {
   background: rgba(148, 160, 255, .24);
   border-color: rgba(148, 160, 255, .24);
-  color: 9eade6
+  color: #9eade6
 }
 
 .fc.fc-unthemed .fc-toolbar .fc-button.fc-dayGridMonth-button:focus,
@@ -3346,7 +3346,7 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  font-family: "PrimeIcons" !important;
+  font-family: "PrimeIcons", sans-serif !important;
   font-size: 1.4rem;
   width: 2rem;
   height: 2rem;
@@ -3440,7 +3440,7 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
 }
 
 .fc.fc-theme-standard .fc-toolbar .fc-button .fc-icon-chevron-left {
-  font-family: "PrimeIcons" !important;
+  font-family: "PrimeIcons", sans-serif !important;
   text-indent: 0;
   font-size: 1.4rem
 }
@@ -3450,7 +3450,7 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
 }
 
 .fc.fc-theme-standard .fc-toolbar .fc-button .fc-icon-chevron-right {
-  font-family: "PrimeIcons" !important;
+  font-family: "PrimeIcons", sans-serif !important;
   text-indent: 0;
   font-size: 1.4rem
 }
@@ -3487,7 +3487,7 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
 .fc.fc-theme-standard .fc-toolbar .fc-button.fc-timeGridDay-button.fc-button-active {
   background: rgba(158, 173, 230, .16);
   border-color: rgba(158, 173, 230, .16);
-  color: 9eade6
+  color: #9eade6
 }
 
 .fc.fc-theme-standard .fc-toolbar .fc-button.fc-dayGridMonth-button.fc-button-active:hover,
@@ -3495,7 +3495,7 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
 .fc.fc-theme-standard .fc-toolbar .fc-button.fc-timeGridDay-button.fc-button-active:hover {
   background: rgba(148, 160, 255, .24);
   border-color: rgba(148, 160, 255, .24);
-  color: 9eade6
+  color: #9eade6
 }
 
 .fc.fc-theme-standard .fc-toolbar .fc-button.fc-dayGridMonth-button:not(:disabled):focus,
@@ -3588,7 +3588,7 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
 }
 
 .p-orderlist .p-orderlist-list .p-orderlist-item.p-highlight {
-  color: 9eade6;
+  color: #9eade6;
   background: rgba(158, 173, 230, .16)
 }
 
@@ -3618,7 +3618,7 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
 
 .p-organizationchart .p-organizationchart-node-content.p-highlight {
   background: rgba(158, 173, 230, .16);
-  color: 9eade6
+  color: #9eade6
 }
 
 .p-organizationchart .p-organizationchart-node-content.p-highlight .p-node-toggler i {
@@ -3743,7 +3743,7 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
 .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
   background: rgba(158, 173, 230, .16);
   border-color: rgba(158, 173, 230, .16);
-  color: 9eade6
+  color: #9eade6
 }
 
 .p-paginator .p-paginator-pages .p-paginator-page:not(.p-highlight):hover {
@@ -3815,7 +3815,7 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
 }
 
 .p-picklist .p-picklist-list .p-picklist-item.p-highlight {
-  color: 9eade6;
+  color: #9eade6;
   background: rgba(158, 173, 230, .16)
 }
 
@@ -3930,17 +3930,17 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
 
 .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight {
   background: rgba(158, 173, 230, .16);
-  color: 9eade6
+  color: #9eade6
 }
 
 .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight .p-tree-toggler,
 .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight .p-treenode-icon {
-  color: 9eade6
+  color: #9eade6
 }
 
 .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight .p-tree-toggler:hover,
 .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight .p-treenode-icon:hover {
-  color: 9eade6
+  color: #9eade6
 }
 
 .p-tree .p-tree-container .p-treenode .p-treenode-content.p-treenode-selectable:not(.p-highlight):hover {
@@ -3990,11 +3990,11 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
 
 .p-tree.p-tree-horizontal .p-treenode .p-treenode-content.p-highlight {
   background-color: rgba(158, 173, 230, .16);
-  color: 9eade6
+  color: #9eade6
 }
 
 .p-tree.p-tree-horizontal .p-treenode .p-treenode-content.p-highlight .p-treenode-icon {
-  color: 9eade6
+  color: #9eade6
 }
 
 .p-tree.p-tree-horizontal .p-treenode .p-treenode-content .p-tree-toggler {
@@ -4089,7 +4089,7 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
   height: 1.143rem;
   min-width: 1.143rem;
   line-height: 1.143rem;
-  color: 9eade6;
+  color: #9eade6;
   background: rgba(158, 173, 230, .16);
   margin-left: .7rem
 }
@@ -5938,7 +5938,6 @@ p-togglebutton.ng-dirty.ng-invalid>.p-togglebutton.p-button {
   background: transparent;
   transition: box-shadow .3s;
   border-radius: 6px;
-  background: transparent
 }
 
 .p-steps .p-steps-item .p-menuitem-link .p-steps-number {
