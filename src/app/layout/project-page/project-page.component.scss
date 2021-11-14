@@ -1,0 +1,32 @@
+:host {
+  --top-bar-height: 32px;
+
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  background-color: var(--slate-level0);
+
+  .top-bar {
+    height: 32px;
+  }
+
+  .logo {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    margin-left: 6px;
+
+    &-type {
+      margin-left: 6px;
+    }
+  }
+
+  .nav-wrapper {
+    width: 86px;
+  }
+
+  .content-wrapper {
+    background-color: var(--slate-level1);
+    border-top-left-radius: 15px;
+  }
+}

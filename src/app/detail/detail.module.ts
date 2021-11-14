@@ -5,10 +5,15 @@ import { DetailRoutingModule } from './detail-routing.module';
 
 import { DetailComponent } from './detail.component';
 import { SharedModule } from '../shared/shared.module';
-import { FullPageModule } from '../layout/full-page/full-page.module';
+import { ProjectPageModule } from '../layout/project-page/project-page.module';
 
 @NgModule({
   declarations: [DetailComponent],
-  imports: [CommonModule, SharedModule, DetailRoutingModule, FullPageModule]
+  imports: [
+    CommonModule,
+    SharedModule,
+    DetailRoutingModule,
+    ProjectPageModule,
+  ]
 })
 export class DetailModule {}
