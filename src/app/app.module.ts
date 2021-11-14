@@ -20,9 +20,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { APP_CONFIG } from '../environments/environment';
 
-// FlameCast Storage Providers
-import { ElectronFileSystemStorageProviderService } from './shared/services/storage-providers/electron-file-system-storage-provider.service';
-
 // FlameCast NgRx
 import { metaReducers } from './shared/store/metaReducers';
 import { reducers } from './shared/store/reducers';
@@ -35,7 +32,9 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
   new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+  ],
   imports: [
     BrowserModule,
     FormsModule,
@@ -62,6 +61,8 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
   providers: [
     { provide: 'StorageProvider', useFactory: storageProviderFactory}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [
+  ]
 })
 export class AppModule {}
