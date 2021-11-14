@@ -1,4 +1,5 @@
 @import "./themes/default-dark.scss";
+@import "primeflex/primeflex.scss";
 @import "./fragments/reset";
 @import "./fragments/colors";
 @import "./fragments/typography";
@@ -15,8 +16,15 @@ body {
 
 html,
 body {
-  height: 100vh;
   color: var(--text-color);
+  background-color: var(--slate-level0);
+  height: 100%;
+}
+
+.grid {
+  margin-right: 0;
+  margin-left: 0;
+  margin-top: 0;
 }
 
 /* Remove all animations and transitions for people that prefer not to see them */
