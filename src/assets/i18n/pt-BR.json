@@ -1,12 +1,32 @@
 {
   "PAGES": {
-      "HOME": {
-        "TITLE": "O app funciona!",
-        "GO_TO_DETAIL": "Voltar aos detalhes"
+    "HOME": {
+      "TITLE": "O app funciona!",
+      "GO_TO_DETAIL": "Ir aos detalhes"
+    },
+    "DETAIL": {
+      "TITLE": "Página de detalhes!",
+      "BACK_TO_HOME": "Voltar à home"
+    },
+    "SIDENAV": {
+      "INFO": {
+        "TITLE": "Informações do Episódio"
       },
-      "DETAIL": {
-        "TITLE": "Página de detalhes!",
-        "BACK_TO_HOME": "Voltar à home"
+      "PLAN": {
+        "TITLE": "Planejar Episódio"
+      },
+      "RECORD": {
+        "TITLE": "Gravar"
+      },
+      "MIX": {
+        "TITLE": "Mixar Áudio"
+      },
+      "PUBLISH": {
+        "TITLE": "Publicar Episódio"
+      },
+      "SETTINGS": {
+        "TITLE": "Configurações"
+      }
     }
   }
 }
