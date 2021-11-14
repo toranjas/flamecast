@@ -7,6 +7,7 @@ import { DetailRoutingModule } from './detail/detail-routing.module';
 import { InformationRoutingModule } from './information/information-routing.module';
 import { PlanRoutingModule } from './plan/plan-routing.module';
 import { RecordRoutingModule } from './record/record-routing.module';
+import { MixRoutingModule } from './mix/mix-routing.module';
 
 const routes: Routes = [
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
     InformationRoutingModule,
     PlanRoutingModule,
     RecordRoutingModule,
+    MixRoutingModule
   ],
   exports: [RouterModule]
 })
