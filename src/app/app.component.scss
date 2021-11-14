@@ -1,3 +1,10 @@
-:host {
-  
+app-root {
+  background-color: var(--slate-level0);
+  display: block;
+  height: 100%;
+
+  router-outlet + * {
+    display: block;
+    height: 100%;
+  }
 }
