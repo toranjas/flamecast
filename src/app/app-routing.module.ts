@@ -9,6 +9,7 @@ import { PlanRoutingModule } from './plan/plan-routing.module';
 import { RecordRoutingModule } from './record/record-routing.module';
 import { MixRoutingModule } from './mix/mix-routing.module';
 import { PublishRoutingModule } from './publish/publish-routing.module';
+import { SettingsModule } from './settings/settings.module';
 
 const routes: Routes = [
   {
@@ -32,6 +33,7 @@ const routes: Routes = [
     RecordRoutingModule,
     MixRoutingModule,
     PublishRoutingModule,
+    SettingsModule,
   ],
   exports: [RouterModule]
 })

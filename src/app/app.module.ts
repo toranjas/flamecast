@@ -30,6 +30,7 @@ import storageProviderFactory from './shared/services/storage-providers/storage-
 import { RecordModule } from './record/record.module';
 import { MixModule } from './mix/mix.module';
 import { PublishModule } from './publish/publish.module';
+import { SettingsModule } from './settings/settings.module';
 
 // AoT requires an exported function for factories
 const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
@@ -52,6 +53,7 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
     RecordModule,
     MixModule,
     PublishModule,
+    SettingsModule,
     AppRoutingModule,
     TranslateModule.forRoot({
       loader: {
