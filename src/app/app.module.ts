@@ -25,6 +25,7 @@ import { metaReducers } from './shared/store/metaReducers';
 import { reducers } from './shared/store/reducers';
 import { effects } from './shared/store/effects';
 import storageProviderFactory from './shared/services/storage-providers/storage-provider-factory';
+import { InformationModule } from './information/information.module';
 
 
 // AoT requires an exported function for factories
@@ -43,6 +44,7 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
     SharedModule,
     HomeModule,
     DetailModule,
+    InformationModule,
     AppRoutingModule,
     TranslateModule.forRoot({
       loader: {
@@ -62,7 +64,6 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
     { provide: 'StorageProvider', useFactory: storageProviderFactory}
   ],
   bootstrap: [AppComponent],
-  exports: [
-  ]
+  exports: []
 })
 export class AppModule {}
