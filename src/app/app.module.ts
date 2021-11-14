@@ -11,8 +11,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+// Pages
 import { HomeModule } from './home/home.module';
-import { DetailModule } from './detail/detail.module';
+import { InformationModule } from './information/information.module';
+import { PlanModule } from './plan/plan.module';
+import { RecordModule } from './record/record.module';
+import { MixModule } from './mix/mix.module';
+import { PublishModule } from './publish/publish.module';
+import { SettingsModule } from './settings/settings.module';
 
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
@@ -24,13 +30,7 @@ import { APP_CONFIG } from '../environments/environment';
 import { metaReducers } from './shared/store/metaReducers';
 import { reducers } from './shared/store/reducers';
 import { effects } from './shared/store/effects';
-import { InformationModule } from './information/information.module';
-import { PlanModule } from './plan/plan.module';
 import storageProviderFactory from './shared/services/storage-providers/storage-provider-factory';
-import { RecordModule } from './record/record.module';
-import { MixModule } from './mix/mix.module';
-import { PublishModule } from './publish/publish.module';
-import { SettingsModule } from './settings/settings.module';
 
 // AoT requires an exported function for factories
 const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
@@ -47,7 +47,6 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
     CoreModule,
     SharedModule,
     HomeModule,
-    DetailModule,
     InformationModule,
     PlanModule,
     RecordModule,
