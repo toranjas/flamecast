@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import * as EpisodeActions from './episode.actions';
 import * as EpisodeFunctions from './episode.reducer-functions';
-import * as InfoActions from   '../info/store/info.actions'
+import * as InfoActions from   '../info/store/info.actions';
 import * as InfoFunctions from '../info/store/info.reducer-functions';
 import * as SegmentActions from '../segments/store/segments.actions';
 import * as SegmentFunctions from '../segments/store/segments.reducer-functions';

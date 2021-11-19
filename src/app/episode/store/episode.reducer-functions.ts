@@ -1,8 +1,6 @@
-import { Episode } from "../episode.models";
+import { Episode } from '../episode.models';
 
 export const loadEpisodeSuccess = (
   state: Episode,
-  { episode }: { episode: Episode, episodeLocation: string }
-): Episode => {
-  return episode;
-};
+  { episode }: { episode: Episode; episodeLocation: string }
+): Episode => episode;

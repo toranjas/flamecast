@@ -1,4 +1,4 @@
-import { Episode, EpisodeInfo } from "../../episode.models";
+import { Episode, EpisodeInfo } from '../../episode.models';
 
 export const setInfoProperties = (state: Episode, payload: Partial<EpisodeInfo>) => ({
   ...state,
@@ -6,4 +6,4 @@ export const setInfoProperties = (state: Episode, payload: Partial<EpisodeInfo>)
     ...state.info,
     ...payload
   }
-})
+});

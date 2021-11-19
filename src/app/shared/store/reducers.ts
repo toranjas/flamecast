@@ -1,13 +1,13 @@
-import { episodeReducer } from "../../episode/store/episode.reducer";
+import { episodeReducer } from '../../episode/store/episode.reducer';
 
 export const reducers = {
   episode: episodeReducer
 
   // Most Recently Used
   // History (undo/redo)
-  // Recent  
+  // Recent
   // Media Control
-  
+
   // Settings (as in deliberate configuration that is persisted)
   // - I think settings SHOULD NOT include "bachelor mode" for window position, MRU, etc.
   // - Why? Because we will persist it as a whole document.
@@ -37,7 +37,7 @@ export const reducers = {
   // Obviously, I stole them from HTML5 :-D
   // To me, they are serving the same purpose but maybe the names suck for our intended use.
 
-}
+};
 
 // export const reducers2 = {
 //   episode: episodeReducer,
@@ -51,8 +51,8 @@ export const reducers = {
 // }
 
 // export const reducers = {
-//   episodeInfo: episodeInfoReducer, 
-//   segments: segmentsReducer, 
+//   episodeInfo: episodeInfoReducer,
+//   segments: segmentsReducer,
 //   parts: partsReducer
 // };
 
