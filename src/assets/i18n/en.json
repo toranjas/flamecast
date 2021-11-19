@@ -1,12 +1,32 @@
 {
   "PAGES": {
-      "HOME": {
-        "TITLE": "Welcome to FlameCast",
-        "GO_TO_DETAIL": "Go to Detail"
-      },
-      "DETAIL": {
-        "TITLE": "Detail page!",
-        "BACK_TO_HOME": "Back to Home"
+    "HOME": {
+      "TITLE": "Welcome to FlameCast",
+      "GO_TO_DETAIL": "Go to Detail"
+    },
+    "DETAIL": {
+      "TITLE": "Detail page!",
+      "BACK_TO_HOME": "Back to Home"
+    }
+  },
+  "SIDENAV": {
+    "INFO": {
+      "TITLE": "Episode Information"
+    },
+    "PLAN": {
+      "TITLE": "Plan Episode"
+    },
+    "RECORD": {
+      "TITLE": "Record"
+    },
+    "MIX": {
+      "TITLE": "Mix Audio"
+    },
+    "PUBLISH": {
+      "TITLE": "Publish Episode"
+    },
+    "SETTINGS": {
+      "TITLE": "Settings"
     }
   }
 }
