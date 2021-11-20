@@ -2,7 +2,8 @@ import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { ElectronService } from './core/services';
 import { TranslateService } from '@ngx-translate/core';
-import { APP_CONFIG } from '../environments/environment';
+import { APP_CONFIG } from '@env/environment';
+import { ElectronService } from './core/services';
 
 @Component({
   selector: 'app-root',

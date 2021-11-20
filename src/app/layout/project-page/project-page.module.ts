@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '@app/shared/shared.module';
 import { ProjectPageComponent } from './project-page.component';
 
 @NgModule({
