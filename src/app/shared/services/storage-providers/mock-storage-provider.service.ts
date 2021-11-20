@@ -9,23 +9,21 @@ import StorageProvider from './StorageProvider';
 export class MockStorageProviderService implements StorageProvider {
 
   constructor() { }
-  createEpisode = async (episodeLocation: string) => {
-    return emptyEpisode();
-  };
-  
+  createEpisode = async (episodeLocation: string) => emptyEpisode();
+
   saveEpisode = async (episode: Episode) => {
     // Do nothing
   };
 
-  loadEpisode = async (episodeLocation: string) => {
+  loadEpisode = async (episodeLocation: string) =>
     // SH: Feel free to add any mock data you want here that makes it easier to build the UI.
-    return {
-      id: "MOCK_EPISODE",
+     ({
+      id: 'MOCK_EPISODE',
       info: emptyEpisodeInfo(),
       segments: {},
       parts: {},
       slides: {},
       takes: {}
-    };
-  };
+    })
+  ;
 }

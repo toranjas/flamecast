@@ -5,7 +5,7 @@ import { orderableItemDictionaryToArray } from '../../episode.utils';
 export const selectParts = createSelector(
   createFeatureSelector('episode'),
   (state: Episode) => {
-    console.log("Select Parts");
+    console.log('Select Parts');
     return orderableItemDictionaryToArray(state.parts);
   }
-)
+);
