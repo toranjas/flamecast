@@ -33,25 +33,25 @@ export interface Segment extends OrderableItem {
   name: string;
 }
 
-export interface SegmentDictionary extends OrderableItemDictionary<Segment> {}
+export type SegmentDictionary = OrderableItemDictionary<Segment>;
 
 export interface Part extends OrderableItem {
   segmentId: string;
   name: string;
 }
 
-export interface PartDictionary extends OrderableItemDictionary<Part> {}
+export type PartDictionary = OrderableItemDictionary<Part>;
 
 export interface Slide extends OrderableItem {
   partId: string;
   name: string;
 }
 
-export interface SlideDictionary extends OrderableItemDictionary<Slide> {}
+export type SlideDictionary = OrderableItemDictionary<Slide>;
 
 export interface Take extends OrderableItem {
   partId: string;
   name: string;
 }
 
-export interface TakeDictionary extends OrderableItemDictionary<Take> {}
+export type TakeDictionary = OrderableItemDictionary<Take>;

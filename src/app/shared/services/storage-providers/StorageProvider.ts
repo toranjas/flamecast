@@ -1,4 +1,4 @@
-import { Episode } from "../../../episode/episode.models";
+import { Episode } from '../../../episode/episode.models';
 
 export default interface StorageProvider {
 

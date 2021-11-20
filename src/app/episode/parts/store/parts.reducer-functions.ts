@@ -13,16 +13,14 @@ import {
 
 export const changePartProperties = (
   state: Episode,
-  { partId, changes }: { partId: string, changes: Partial<Part> }
-): Episode => {
-  return {
+  { partId, changes }: { partId: string; changes: Partial<Part> }
+): Episode => ({
     ...state,
     parts: {
       ...state.parts,
       [partId]: {...state.parts[partId], ...changes}
     }
-  }
-}
+  });
 
 
 export const createPart = (
@@ -38,8 +36,8 @@ export const createPart = (
 
   const newItem: Part = {
     id: uuidv4(),
-    segmentId: segmentId,
-    name: name,
+    segmentId,
+    name,
     order: order ?? nextOrderableItemOrder(state.parts, predicate),
   };
   return {
@@ -51,32 +49,28 @@ export const createPart = (
 export const movePartUp = (
   state: Episode,
   { partId }: { partId: string }
-): Episode => {
-  return {
+): Episode => ({
     ...state,
     parts: { ...moveOrderableItemUp(state.parts, partId, (item) => item.segmentId === state.parts[partId].segmentId) },
-  };
-};
+  });
 
 export const movePartDown = (
   state: Episode,
   { partId }: { partId: string }
-): Episode => {
-  return {
+): Episode => ({
     ...state,
     parts: { ...moveOrderableItemDown(state.parts, partId, (item) => item.segmentId === state.parts[partId].segmentId) },
-  };
-};
+  });
 
 export const deletePart = (
   state: Episode,
   { partId }: { partId: string }
 ): Episode => {
-  let parts = {...state.parts};
+  const parts = {...state.parts};
   delete parts[partId];
 
   return {
     ...state,
     parts
-  }
-}
+  };
+};

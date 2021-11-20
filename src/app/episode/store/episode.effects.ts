@@ -20,11 +20,11 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import StorageProvider from '../../shared/services/storage-providers/StorageProvider';
 
 // Actions
-import { 
-  createEpisodeAction, 
-  loadEpisodeAction, 
-  loadEpisodeSuccessAction, 
-  saveEpisodeSuccessAction 
+import {
+  createEpisodeAction,
+  loadEpisodeAction,
+  loadEpisodeSuccessAction,
+  saveEpisodeSuccessAction
 } from './episode.actions';
 
 import { Episode } from '../episode.models';
@@ -36,15 +36,15 @@ import { episodeHasChanges } from '../episode.utils';
 export class EpisodeEffects {
   // DN: Investigate the 'Loadable API' pattern.
 
-  stopSavingChanges: boolean = false;
-  hasLoadedOrCreated: boolean = false;
+  stopSavingChanges = false;
+  hasLoadedOrCreated = false;
 
   //#region Helpers
 
   private readonly suspendSave = tap((episode: Episode) => {
     // Suspend saving until load is successfully finished
     this.stopSavingChanges = true;
-    console.log("Preventing save.");
+    console.log('Preventing save.');
 
     // Letting the save routine know that it is allowed to save...
     // Once saving changes is no longer suspended.
@@ -59,8 +59,8 @@ export class EpisodeEffects {
   createEpisode$ = createEffect(() =>
     this.actions$.pipe(
       ofType(createEpisodeAction),
-      mergeMap((action) => 
-        
+      mergeMap((action) =>
+
          from(this.storageProvider.createEpisode(action.episodeLocation)).pipe(
           // Don't Propigate Episode if it is undefined
           filter((episode) => episode !== undefined) as OperatorFunction<
@@ -89,7 +89,7 @@ export class EpisodeEffects {
           Episode | undefined,
           Episode
           >,
-          this.suspendSave,         
+          this.suspendSave,
           map((episode) => loadEpisodeSuccessAction({ episode, episodeLocation: action.episodeLocation })),
           catchError((e) => {
             console.log('FAILED TO LOAD EPISODE!!!!');
@@ -107,12 +107,12 @@ export class EpisodeEffects {
       tap(action => {
         // Resume saving changes
         this.stopSavingChanges = false;
-        console.log("Allowing save.");
+        console.log('Allowing save.');
       }),
     ),
     { dispatch: false });
 
-  isFirstTime: boolean = true;
+  isFirstTime = true;
 
   saveEpisode$ = createEffect(
     () =>
@@ -122,11 +122,11 @@ export class EpisodeEffects {
         // Don't do anything in this pipeline of saving is suspended
         filter(episode => {
           if(!this.hasLoadedOrCreated) {
-            console.log("Saving prevented. Episode has not loaded or been created yet.");
+            console.log('Saving prevented. Episode has not loaded or been created yet.');
             return false;
           }
           if(this.stopSavingChanges) {
-            console.log("Saving prevented. Episode is currently creating or loading.");
+            console.log('Saving prevented. Episode is currently creating or loading.');
             return false;
           }
           return true;
@@ -154,7 +154,7 @@ export class EpisodeEffects {
         >,
 
         tap(action => {
-          console.log("Saving...");
+          console.log('Saving...');
         }),
 
         // Do the actual saving
