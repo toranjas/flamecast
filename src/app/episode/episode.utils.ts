@@ -15,24 +15,24 @@ import {
 // ███████ ██      ██ ██         ██       ██
 
 export const emptyEpisodeInfo = (): EpisodeInfo => ({
-    showName: '',
-    title: '',
-    episodeNumber: '',
-    releaseDate: undefined,
-    description: '',
-    author: '',
-    category: '',
-    copyright: '',
-  });
+  showName: '',
+  title: '',
+  episodeNumber: '',
+  releaseDate: undefined,
+  description: '',
+  author: '',
+  category: '',
+  copyright: '',
+});
 
 export const emptyEpisode = (): Episode => ({
-    id: uuidv4(),
-    info: emptyEpisodeInfo(),
-    segments: {},
-    parts: {},
-    slides: {},
-    takes: {}
-  });
+  id: uuidv4(),
+  info: emptyEpisodeInfo(),
+  segments: {},
+  parts: {},
+  slides: {},
+  takes: {},
+});
 
 //  █████  ██████  ██████   █████  ██    ██       ██             ██        ██████  ██████       ██
 // ██   ██ ██   ██ ██   ██ ██   ██  ██  ██       ██               ██      ██    ██ ██   ██      ██
@@ -40,34 +40,39 @@ export const emptyEpisode = (): Episode => ({
 // ██   ██ ██   ██ ██   ██ ██   ██    ██         ██               ██      ██    ██ ██   ██ ██   ██
 // ██   ██ ██   ██ ██   ██ ██   ██    ██          ██             ██        ██████  ██████   █████
 
-const arrayOfIds = <T extends OrderableItem>(items: OrderableItemDictionary<T>) => Object.keys(items);
+const arrayOfIds = <T extends OrderableItem>(
+  items: OrderableItemDictionary<T>,
+) => Object.keys(items);
 
 const arrayOfItems = <T extends OrderableItem>(
   items: OrderableItemDictionary<T>,
-  predicate?: OrderableItemPredicate<T>
-) => arrayOfIds(items)
+  predicate?: OrderableItemPredicate<T>,
+) =>
+  arrayOfIds(items)
     .map((id) => items[id])
     .filter((item) => !predicate || predicate(item));
 
-const arrayOfKeyItemPairs = <T extends OrderableItem>(items: OrderableItemDictionary<T>) => Object.keys(items)
-    .map((key) => ({ key, item: items[key] }));
+const arrayOfKeyItemPairs = <T extends OrderableItem>(
+  items: OrderableItemDictionary<T>,
+) => Object.keys(items).map((key) => ({ key, item: items[key] }));
 
 const getArrayOfOrders = <T extends OrderableItem>(
   items: OrderableItemDictionary<T>,
-  predicate?: OrderableItemPredicate<T>) => {
-  let temp = arrayOfIds(items).map(key => items[key]);
-    if(predicate) {
-      temp = temp.filter(predicate);
-    }
-    return temp.map(item => item.order);
+  predicate?: OrderableItemPredicate<T>,
+) => {
+  let temp = arrayOfIds(items).map((key) => items[key]);
+  if (predicate) {
+    temp = temp.filter(predicate);
+  }
+  return temp.map((item) => item.order);
 };
 
 export const orderableItemDictionaryToArray = <T extends OrderableItem>(
-  d: OrderableItemDictionary<T>) => Object
-    .keys(d)
-    .map(key => d[key])
+  d: OrderableItemDictionary<T>,
+) =>
+  Object.keys(d)
+    .map((key) => d[key])
     .sort(compareOrderableItem);
-
 
 //  ██████  ██████  ███    ███ ██████   █████  ██████  ███████
 // ██      ██    ██ ████  ████ ██   ██ ██   ██ ██   ██ ██
@@ -76,8 +81,12 @@ export const orderableItemDictionaryToArray = <T extends OrderableItem>(
 //  ██████  ██████  ██      ██ ██      ██   ██ ██   ██ ███████
 
 export const compareOrderableItem = (a: OrderableItem, b: OrderableItem) => {
-  if (a.order < b.order) {return -1;}
-  if (a.order > b.order) {return 1;}
+  if (a.order < b.order) {
+    return -1;
+  }
+  if (a.order > b.order) {
+    return 1;
+  }
   return 0;
 };
 
@@ -89,41 +98,53 @@ export const compareOrderableItem = (a: OrderableItem, b: OrderableItem) => {
 
 export const maxOrderableItemOrder = <T extends OrderableItem>(
   items: OrderableItemDictionary<T>,
-  predicate?: OrderableItemPredicate<T>
+  predicate?: OrderableItemPredicate<T>,
 ) => {
-  if (!items) {return 0;}
+  if (!items) {
+    return 0;
+  }
   const orders = getArrayOfOrders(items, predicate); //Object.keys(items).map((key) => items[key].order);
   return Math.max(...orders);
 };
 
 export const minOrderableItemOrder = <T extends OrderableItem>(
   items: OrderableItemDictionary<T>,
-  predicate?: OrderableItemPredicate<T>) => {
-  if (!items) {return 0;}
+  predicate?: OrderableItemPredicate<T>,
+) => {
+  if (!items) {
+    return 0;
+  }
   const orders = getArrayOfOrders(items, predicate); //Object.keys(items).map((key) => items[key].order);
   return Math.min(...orders);
 };
 
 export const nextOrderableItemOrder = <T extends OrderableItem>(
   items: OrderableItemDictionary<T>,
-  predicate?: OrderableItemPredicate<T>) => maxOrderableItemOrder(items, predicate) + 1;
+  predicate?: OrderableItemPredicate<T>,
+) => maxOrderableItemOrder(items, predicate) + 1;
 
 const itemBefore = <T extends OrderableItem>(
   items: OrderableItemDictionary<T>,
   targetOrder: number,
-  predicate?: OrderableItemPredicate<T>) => {
-    const itemsBefore = arrayOfItems(items, predicate).filter(item => item.order < targetOrder);
-    const orderBefore = Math.max(...itemsBefore.map(item => item.order));
-    return itemsBefore.find(item => item.order === orderBefore);
+  predicate?: OrderableItemPredicate<T>,
+) => {
+  const itemsBefore = arrayOfItems(items, predicate).filter(
+    (item) => item.order < targetOrder,
+  );
+  const orderBefore = Math.max(...itemsBefore.map((item) => item.order));
+  return itemsBefore.find((item) => item.order === orderBefore);
 };
 
 const itemAfter = <T extends OrderableItem>(
   items: OrderableItemDictionary<T>,
   targetOrder: number,
-  predicate?: OrderableItemPredicate<T>) => {
-    const itemsBefore = arrayOfItems(items, predicate).filter(item => item.order > targetOrder);
-    const orderBefore = Math.min(...itemsBefore.map(item => item.order));
-    return itemsBefore.find(item => item.order === orderBefore);
+  predicate?: OrderableItemPredicate<T>,
+) => {
+  const itemsBefore = arrayOfItems(items, predicate).filter(
+    (item) => item.order > targetOrder,
+  );
+  const orderBefore = Math.min(...itemsBefore.map((item) => item.order));
+  return itemsBefore.find((item) => item.order === orderBefore);
 };
 
 //  █████  ██████  ██████      ██ ██████  ███████ ███    ███  ██████  ██    ██ ███████
@@ -135,9 +156,8 @@ const itemAfter = <T extends OrderableItem>(
 export const addOrderableItem = <T extends OrderableItem>(
   items: OrderableItemDictionary<T>,
   newItem: T,
-  predicate?: OrderableItemPredicate<T>
+  predicate?: OrderableItemPredicate<T>,
 ): OrderableItemDictionary<T> => {
-
   const newItems = {
     ...openSlotForOrderableItem(items, newItem.order, predicate),
     [newItem.id]: newItem,
@@ -149,9 +169,8 @@ export const addOrderableItem = <T extends OrderableItem>(
 
   return {
     ...items,
-    ...defrag
+    ...defrag,
   };
-
 };
 
 // export const removeOrderableItem = <T extends OrderableItem>(
@@ -172,42 +191,50 @@ export const addOrderableItem = <T extends OrderableItem>(
 // ██  ██  ██ ██    ██  ██  ██  ██
 // ██      ██  ██████    ████   ███████
 
-const moveOrderableItemUpOrDown= <T extends OrderableItem>(
+const moveOrderableItemUpOrDown = <T extends OrderableItem>(
   items: OrderableItemDictionary<T>,
   targetId: string,
-  findSwapWithItemFn: (x: OrderableItemDictionary<T>, order: number, predicate?: OrderableItemPredicate<T>) => T | undefined,
-  predicate?: OrderableItemPredicate<T>
+  findSwapWithItemFn: (
+    x: OrderableItemDictionary<T>,
+    order: number,
+    predicate?: OrderableItemPredicate<T>,
+  ) => T | undefined,
+  predicate?: OrderableItemPredicate<T>,
 ) => {
-
-  if(Object.keys(items).length <= 1) {return items;}
+  if (Object.keys(items).length <= 1) {
+    return items;
+  }
 
   const target = items[targetId];
-  if(!target) {return items;}
+  if (!target) {
+    return items;
+  }
 
   // const minOrder = minOrderableItemOrder(items);
   // if(target.order === minOrder) return items;
 
   const swapWithItem = findSwapWithItemFn(items, target.order, predicate);
-  if(!swapWithItem) {return items;}
+  if (!swapWithItem) {
+    return items;
+  }
 
   return {
     ...items,
-    [targetId]: { ... target, order: swapWithItem.order },
-    [swapWithItem.id]: {...swapWithItem, order: target.order}
+    [targetId]: { ...target, order: swapWithItem.order },
+    [swapWithItem.id]: { ...swapWithItem, order: target.order },
   };
-
 };
 
 export const moveOrderableItemUp = <T extends OrderableItem>(
   items: OrderableItemDictionary<T>,
   targetId: string,
-  predicate?: OrderableItemPredicate<T>
+  predicate?: OrderableItemPredicate<T>,
 ) => moveOrderableItemUpOrDown(items, targetId, itemBefore, predicate);
 
 export const moveOrderableItemDown = <T extends OrderableItem>(
   items: OrderableItemDictionary<T>,
   targetId: string,
-  predicate?: OrderableItemPredicate<T>
+  predicate?: OrderableItemPredicate<T>,
 ) => moveOrderableItemUpOrDown(items, targetId, itemAfter, predicate);
 
 //  ██████ ██   ██  █████  ███    ██  ██████  ███████ ███████
@@ -216,25 +243,33 @@ export const moveOrderableItemDown = <T extends OrderableItem>(
 // ██      ██   ██ ██   ██ ██  ██ ██ ██    ██ ██           ██
 //  ██████ ██   ██ ██   ██ ██   ████  ██████  ███████ ███████
 
-export const episodeHasChanges = (before: Episode | undefined, after: Episode | undefined): boolean => {
-
-  if(!before) {
+export const episodeHasChanges = (
+  before: Episode | undefined,
+  after: Episode | undefined,
+): boolean => {
+  if (!before) {
     // No before or after. Nothing changed
-    if(!after) {return false;}
+    if (!after) {
+      return false;
+    }
     // No before but there is an after. Change.
     return true;
   }
   // There is a before but not after. Change.
-  if(!after) {
+  if (!after) {
     return true;
   }
 
   // Before but there is no after. Change
-  if(before && !after) {return true;}
+  if (before && !after) {
+    return true;
+  }
 
   // Both before and after are defined. So compare them.
   const changes = diff(before, after);
-  if(!changes) {return false;}
+  if (!changes) {
+    return false;
+  }
   return Object.keys(changes).length !== 0;
 };
 
@@ -247,7 +282,7 @@ export const episodeHasChanges = (before: Episode | undefined, after: Episode | 
 const openSlotForOrderableItem = <T extends OrderableItem>(
   items: OrderableItemDictionary<T>,
   orderToOpen: number,
-  predicate?: OrderableItemPredicate<T>
+  predicate?: OrderableItemPredicate<T>,
 ): OrderableItemDictionary<T> => {
   const newItems: { [id: string]: T } = {};
   const keys = Object.keys(items);
@@ -258,7 +293,7 @@ const openSlotForOrderableItem = <T extends OrderableItem>(
     const key = keys[i];
     const oldItem = items[key];
 
-    if(predicate && predicate(oldItem) === false) {
+    if (predicate && predicate(oldItem) === false) {
       continue;
     }
 
@@ -282,13 +317,12 @@ const openSlotForOrderableItem = <T extends OrderableItem>(
 
 const defragmentOrderableItems = <T extends OrderableItem>(
   items: OrderableItemDictionary<T>,
-  predicate?: OrderableItemPredicate<T>
+  predicate?: OrderableItemPredicate<T>,
 ): OrderableItemDictionary<T> => {
-
   const newItems: OrderableItemDictionary<T> = {}; //{ [id: string]: T } = {};
 
   const itemsInOrder = arrayOfKeyItemPairs(items)
-    .filter(keyItem => !predicate || predicate( keyItem.item))
+    .filter((keyItem) => !predicate || predicate(keyItem.item))
     .sort((a, b) => compareOrderableItem(a.item, b.item));
 
   for (let i = 0; i < itemsInOrder.length; i++) {
