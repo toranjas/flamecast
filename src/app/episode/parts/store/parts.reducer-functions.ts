@@ -3,13 +3,13 @@ import {
   Episode,
   Part,
   OrderableItemPredicate,
-} from '../../episode.models';
+} from '@app/episode/episode.models';
 import {
   addOrderableItem,
   moveOrderableItemDown,
   moveOrderableItemUp,
   nextOrderableItemOrder,
-} from '../../episode.utils';
+} from '@app/episode/episode.utils';
 
 export const changePartProperties = (
   state: Episode,

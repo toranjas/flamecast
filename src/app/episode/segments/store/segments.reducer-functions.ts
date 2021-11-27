@@ -1,11 +1,11 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Episode, Segment } from '../../episode.models';
+import { Episode, Segment } from '@app/episode/episode.models';
 import {
   addOrderableItem,
   moveOrderableItemDown,
   moveOrderableItemUp,
   nextOrderableItemOrder,
-} from '../../episode.utils';
+} from '@app/episode/episode.utils';
 
 export const changeSegmentProperties = (
   state: Episode,
@@ -14,7 +14,10 @@ export const changeSegmentProperties = (
     ...state,
     segments: {
       ...state.segments,
-      [segmentId]: {...state.segments[segmentId], ...changes}
+      [segmentId]: {
+        ...state.segments[segmentId],
+        ...changes,
+      }
     }
   });
 

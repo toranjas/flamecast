@@ -1,6 +1,12 @@
+import { v4 as uuidv4 } from 'uuid';
 import { diff } from 'deep-object-diff';
-import { Episode, EpisodeInfo, OrderableItem, OrderableItemDictionary, OrderableItemPredicate } from './episode.models';
-import { v4 as uuidv4, v4 } from 'uuid';
+import {
+  Episode,
+  EpisodeInfo,
+  OrderableItem,
+  OrderableItemDictionary,
+  OrderableItemPredicate,
+} from './episode.models';
 
 // ███████ ███    ███ ██████  ████████ ██    ██
 // ██      ████  ████ ██   ██    ██     ██  ██
@@ -20,7 +26,7 @@ export const emptyEpisodeInfo = (): EpisodeInfo => ({
   });
 
 export const emptyEpisode = (): Episode => ({
-    id: v4(),
+    id: uuidv4(),
     info: emptyEpisodeInfo(),
     segments: {},
     parts: {},
@@ -244,8 +250,10 @@ const openSlotForOrderableItem = <T extends OrderableItem>(
   predicate?: OrderableItemPredicate<T>
 ): OrderableItemDictionary<T> => {
   const newItems: { [id: string]: T } = {};
-
   const keys = Object.keys(items);
+
+  // Reason: need to track different collection by index
+  // eslint-disable-next-line @typescript-eslint/prefer-for-of
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
     const oldItem = items[key];
@@ -285,7 +293,10 @@ const defragmentOrderableItems = <T extends OrderableItem>(
 
   for (let i = 0; i < itemsInOrder.length; i++) {
     const item = itemsInOrder[i];
-    newItems[item.key] = { ...item.item, order: i + 1 };
+    newItems[item.key] = {
+      ...item.item,
+      order: i + 1,
+    };
   }
 
   return newItems;
