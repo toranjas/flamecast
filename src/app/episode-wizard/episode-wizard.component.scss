@@ -1,0 +1,16 @@
+:host {
+  .banner-jumbo {
+    background-image: url(https://media.istockphoto.com/illustrations/illustration-the-magnificent-cosmos-wonders-on-a-alien-planet-illustration-id537813772);
+  }
+
+  .icon-24 {
+    width: 24px;
+    height: 24px;
+  }
+
+  hr {
+    height: 2px;
+    background-color: var(--surface-d);
+    border: none;
+  }
+}

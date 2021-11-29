@@ -1,4 +1,26 @@
 {
+  "GLOBAL": {
+    "CREATE": "Criar",
+    "CANCEL": "Cancelar",
+    "ERRORS": {
+      "WRITE_DENY": {
+        "TITLE": "Sem permissões de escrita.",
+        "DESCRIPTION": "O FlameCast não pode escrever no local escolhido. Dê permissões de escrita, ou escolha um outro local."
+      },
+      "NO_PERMISSION": {
+        "TITLE": "Sem permissões",
+        "DESCRIPTION": "O FlameCast não pode abrir ou escrever no local de trabalho. Dê permissões e tente novamente."
+      },
+      "DISK_FULL": {
+        "TITLE": "Falta de espaço",
+        "DESCRIPTION": "O seu local de trabalho ficou sem espaço livre. Libere mais espaço e tente novamente."
+      },
+      "LOST_LOCATION": {
+        "TITLE": "Local de trabalho não encontrado",
+        "DESCRIPTION": "O local de trabalho não está mais disponível. Ele pode ter sido removido, movido ou não mais acessível."
+      }
+    }
+  },
   "PAGES": {
     "HOME": {
       "TITLE": "O app funciona!",
@@ -8,25 +30,42 @@
       "TITLE": "Página de detalhes!",
       "BACK_TO_HOME": "Voltar à home"
     },
-    "SIDENAV": {
-      "INFO": {
-        "TITLE": "Informações do Episódio"
+    "EPISODE": {
+      "TITLE": "Criar novo episódio",
+      "DESCRIPTION": "Você poderá editar essas informações depois",
+      "NAME": {
+        "LABEL": "Nome do episódio",
+        "ERROR": {
+          "REQUIRED": "Nome do episódio é requerido."
+        }
       },
-      "PLAN": {
-        "TITLE": "Planejar Episódio"
-      },
-      "RECORD": {
-        "TITLE": "Gravar"
-      },
-      "MIX": {
-        "TITLE": "Mixar Áudio"
-      },
-      "PUBLISH": {
-        "TITLE": "Publicar Episódio"
-      },
-      "SETTINGS": {
-        "TITLE": "Configurações"
+      "LOCATION": {
+        "LABEL": "Escolha um local para salvar",
+        "TOOLTIP": "Escolher um local...",
+        "ERROR": {
+          "REQUIRED": "Um local para salvar é requerido."
+        }
       }
+    }
+  },
+  "SIDENAV": {
+    "INFO": {
+      "TITLE": "Informações do Episódio"
+    },
+    "PLAN": {
+      "TITLE": "Planejar Episódio"
+    },
+    "RECORD": {
+      "TITLE": "Gravar"
+    },
+    "MIX": {
+      "TITLE": "Mixar Áudio"
+    },
+    "PUBLISH": {
+      "TITLE": "Publicar Episódio"
+    },
+    "SETTINGS": {
+      "TITLE": "Configurações"
     }
   }
 }

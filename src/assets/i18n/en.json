@@ -1,4 +1,26 @@
 {
+  "GLOBAL": {
+    "CREATE": "Create",
+    "CANCEL": "Cancel",
+    "ERRORS": {
+      "WRITE_DENY": {
+        "TITLE": "No write permissions",
+        "DESCRIPTION": "FlameCast can't write in the location you choosed. Grant write permissions there, or choose another location."
+      },
+      "NO_PERMISSION": {
+        "TITLE": "No permissions",
+        "DESCRIPTION": "FlameCast can't read or write in the working location. Grant permissions there and try again."
+      },
+      "DISK_FULL": {
+        "TITLE": "No more space available",
+        "DESCRIPTION": "Your working location ran out of space. Free up space before trying again."
+      },
+      "LOST_LOCATION": {
+        "TITLE": "Can't find working location",
+        "DESCRIPTION": "Your working location is not available anymore. It may have been moved, deleted or not accessible anymore."
+      }
+    }
+  },
   "PAGES": {
     "HOME": {
       "TITLE": "Welcome to FlameCast",
@@ -7,6 +29,23 @@
     "DETAIL": {
       "TITLE": "Detail page!",
       "BACK_TO_HOME": "Back to Home"
+    },
+    "EPISODE": {
+      "TITLE": "Create new episode",
+      "DESCRIPTION": "You will be able to edit it later",
+      "NAME": {
+        "LABEL": "Name of the episode",
+        "ERROR": {
+          "REQUIRED": "Episode name is required."
+        }
+      },
+      "LOCATION": {
+        "LABEL": "Choose a location to save",
+        "TOOLTIP": "Browse a location...",
+        "ERROR": {
+          "REQUIRED": "A location to save is required."
+        }
+      }
     }
   },
   "SIDENAV": {

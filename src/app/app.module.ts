@@ -31,15 +31,14 @@ import { metaReducers } from './shared/store/metaReducers';
 import { reducers } from './shared/store/reducers';
 import { effects } from './shared/store/effects';
 import storageProviderFactory from './shared/services/storage-providers/storage-provider-factory';
+import { EpisodeWizardModule } from './episode-wizard/episode-wizard.module';
 
 // AoT requires an exported function for factories
 const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
   new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -54,12 +53,13 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
     PublishModule,
     SettingsModule,
     AppRoutingModule,
+    EpisodeWizardModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: httpLoaderFactory,
-        deps: [HttpClient]
-      }
+        deps: [HttpClient],
+      },
     }),
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(effects),
@@ -69,9 +69,9 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
     }),
   ],
   providers: [
-    { provide: 'StorageProvider', useFactory: storageProviderFactory}
+    { provide: 'StorageProvider', useFactory: storageProviderFactory },
   ],
   bootstrap: [AppComponent],
-  exports: []
+  exports: [],
 })
 export class AppModule {}

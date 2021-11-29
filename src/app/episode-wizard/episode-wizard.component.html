@@ -1,0 +1,47 @@
+<app-full-page>
+  <section class="grid">
+    <div class="col">
+      <div class="banner-jumbo w-full"></div>
+    </div>
+  </section>
+
+  <div class="grid">
+    <div class="col">
+      <h2 class="fc-display mt-24p" [innerText]="'PAGES.EPISODE.TITLE' | translate"></h2>
+      <div class="fc-header-2" [innerText]="'PAGES.EPISODE.DESCRIPTION' | translate"></div>
+
+      <div class="fc-field mt-56p">
+        <label for="name" class="fc-body" [innerText]="'PAGES.EPISODE.NAME.LABEL' | translate"></label>
+        <div class="p-inputgroup">
+          <input id="name" class="p-inputtext-lg" pInputText [(ngModel)]="value4" />
+        </div>
+      </div>
+
+      <div class="fc-field mt-16p">
+        <label for="location" class="fc-body" [innerText]="'PAGES.EPISODE.LOCATION.LABEL' | translate"></label>
+        <div class="p-inputgroup">
+          <input id="location" class="p-inputtext-lg" pInputText readonly [(ngModel)]="value5" />
+          <button
+            type="button"
+            pButton
+            pRipple
+            [pTooltip]="'PAGES.EPISODE.LOCATION.TOOLTIP' | translate"
+            tooltipPosition="top"
+          >
+            <svg class="icon-24" viewBox="0 0 24 24">
+              <path d="M6.1,10L4,18V8H21A2,2 0 0,0 19,6H12L10,4H4A2,2 0 0,0 2,6V18A2,2 0 0,0 4,20H19C19.9,20 20.7,19.4 20.9,18.5L23.2,10H6.1M19,18H6L7.6,12H20.6L19,18Z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <hr class="mt-120p">
+
+      <div class="mt-32p flex jc-end">
+        <button pButton pRipple type="button" [label]="'GLOBAL.CANCEL' | translate" class="p-button-text p-button-lg mr-16p" routerLink="/home"></button>
+        <button pButton pRipple type="button" [label]="'GLOBAL.CREATE' | translate" class="p-button-rounded p-button-lg"></button>
+      </div>
+
+    </div>
+  </div>
+</app-full-page>

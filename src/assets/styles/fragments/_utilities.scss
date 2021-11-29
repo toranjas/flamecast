@@ -1,0 +1,14 @@
+/**
+ Big images used as a header of important pages.
+ Compliment it with a `background-image`.
+*/
+.banner-jumbo {
+  height: 250px;
+  background-size: cover;
+  border-radius: 12px;
+}
+
+/* Alignment Utils */
+.jc-end {
+  justify-content: flex-end;
+}

@@ -3,7 +3,6 @@ import { DOCUMENT } from '@angular/common';
 import { ElectronService } from './core/services';
 import { TranslateService } from '@ngx-translate/core';
 import { APP_CONFIG } from '@env/environment';
-import { ElectronService } from './core/services';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +14,7 @@ export class AppComponent {
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private electronService: ElectronService,
-    private translate: TranslateService
+    private translate: TranslateService,
   ) {
     // Set Default Language: English - FlameCast doesn't speak other languages yet
     this.translate.setDefaultLang('en');

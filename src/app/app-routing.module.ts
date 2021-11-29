@@ -9,17 +9,18 @@ import { RecordRoutingModule } from './record/record-routing.module';
 import { MixRoutingModule } from './mix/mix-routing.module';
 import { PublishRoutingModule } from './publish/publish-routing.module';
 import { SettingsModule } from './settings/settings.module';
+import { EpisodeWizardRoutingModule } from './episode-wizard/episode-wizard-routing.module';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'home',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: '**',
-    component: PageNotFoundComponent
-  }
+    component: PageNotFoundComponent,
+  },
 ];
 
 @NgModule({
@@ -31,8 +32,9 @@ const routes: Routes = [
     RecordRoutingModule,
     MixRoutingModule,
     PublishRoutingModule,
+    EpisodeWizardRoutingModule,
     SettingsModule,
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
