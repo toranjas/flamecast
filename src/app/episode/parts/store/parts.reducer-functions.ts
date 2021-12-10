@@ -13,15 +13,14 @@ import {
 
 export const changePartProperties = (
   state: Episode,
-  { partId, changes }: { partId: string; changes: Partial<Part> }
+  { partId, changes }: { partId: string; changes: Partial<Part> },
 ): Episode => ({
-    ...state,
-    parts: {
-      ...state.parts,
-      [partId]: {...state.parts[partId], ...changes}
-    }
-  });
-
+  ...state,
+  parts: {
+    ...state.parts,
+    [partId]: { ...state.parts[partId], ...changes },
+  },
+});
 
 export const createPart = (
   state: Episode,
@@ -29,7 +28,7 @@ export const createPart = (
     name,
     segmentId,
     order,
-  }: { name: string; segmentId: string; order?: number }
+  }: { name: string; segmentId: string; order?: number },
 ): Episode => {
   const predicate: OrderableItemPredicate<Part> = (item) =>
     item.segmentId === segmentId;
@@ -48,29 +47,41 @@ export const createPart = (
 
 export const movePartUp = (
   state: Episode,
-  { partId }: { partId: string }
+  { partId }: { partId: string },
 ): Episode => ({
-    ...state,
-    parts: { ...moveOrderableItemUp(state.parts, partId, (item) => item.segmentId === state.parts[partId].segmentId) },
-  });
+  ...state,
+  parts: {
+    ...moveOrderableItemUp(
+      state.parts,
+      partId,
+      (item) => item.segmentId === state.parts[partId].segmentId,
+    ),
+  },
+});
 
 export const movePartDown = (
   state: Episode,
-  { partId }: { partId: string }
+  { partId }: { partId: string },
 ): Episode => ({
-    ...state,
-    parts: { ...moveOrderableItemDown(state.parts, partId, (item) => item.segmentId === state.parts[partId].segmentId) },
-  });
+  ...state,
+  parts: {
+    ...moveOrderableItemDown(
+      state.parts,
+      partId,
+      (item) => item.segmentId === state.parts[partId].segmentId,
+    ),
+  },
+});
 
 export const deletePart = (
   state: Episode,
-  { partId }: { partId: string }
+  { partId }: { partId: string },
 ): Episode => {
-  const parts = {...state.parts};
+  const parts = { ...state.parts };
   delete parts[partId];
 
   return {
     ...state,
-    parts
+    parts,
   };
 };

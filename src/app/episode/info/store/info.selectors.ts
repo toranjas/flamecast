@@ -1,7 +1,7 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { Episode } from '../../episode.models';
+import { Episode } from '@app/episode/episode.models';
 
 export const selectEpisodeInfo = createSelector(
   createFeatureSelector('episode'),
-  (episode: Episode) => episode.info
+  (episode: Episode) => episode.info,
 );

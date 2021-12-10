@@ -7,4 +7,4 @@ import { ProjectPageComponent } from './project-page.component';
   imports: [SharedModule],
   exports: [ProjectPageComponent],
 })
-export class ProjectPageModule { }
+export class ProjectPageModule {}

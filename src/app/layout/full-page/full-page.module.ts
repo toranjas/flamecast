@@ -7,4 +7,4 @@ import { FullPageComponent } from './full-page.component';
   imports: [],
   exports: [FullPageComponent],
 })
-export class FullPageModule { }
+export class FullPageModule {}

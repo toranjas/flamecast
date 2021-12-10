@@ -13,6 +13,6 @@ import { InformationRoutingModule } from './information-routing.module';
     SharedModule,
     InformationRoutingModule,
     ProjectPageModule,
-  ]
+  ],
 })
 export class InformationModule {}

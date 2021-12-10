@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Episode } from '../../../episode/episode.models';
-import { emptyEpisode } from '../../../episode/episode.utils';
+import { Episode } from '@app/episode/episode.models';
+import { emptyEpisode } from '@app/episode/episode.utils';
 import StorageProvider from './StorageProvider';
 
 // SH: I had to move this down to the constructor.
@@ -11,42 +11,37 @@ import StorageProvider from './StorageProvider';
 // const {ipcRenderer} = (<any>window).require('electron');
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class ElectronFileSystemStorageProviderService implements StorageProvider {
-
+export class ElectronFileSystemStorageProviderService
+  implements StorageProvider
+{
   private ipcRenderer: any;
 
   constructor() {
-    const {ipcRenderer} = (<any>window).require('electron');
+    const { ipcRenderer } = (window as any).require('electron');
     this.ipcRenderer = ipcRenderer;
   }
 
-
   createEpisode = async (episodeLocation: string) => {
     const newEpisode = emptyEpisode();
-    const response = await this.ipcRenderer.invoke(
+    await this.ipcRenderer.invoke(
       'file-system-create-episode',
       episodeLocation,
-      newEpisode
+      newEpisode,
     );
+
     return newEpisode;
   };
 
   saveEpisode = async (episode: Episode) => {
-    const response = await this.ipcRenderer.invoke(
-      'file-system-save-episode',
-      episode
-    );
+    await this.ipcRenderer.invoke('file-system-save-episode', episode);
   };
 
   loadEpisode = async (episodeLocation: string) => {
-    const response = await this.ipcRenderer.invoke(
+    return await this.ipcRenderer.invoke(
       'file-system-load-episode',
-      episodeLocation
+      episodeLocation,
     );
-    return response;
   };
-
-
 }

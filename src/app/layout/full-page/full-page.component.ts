@@ -4,13 +4,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   selector: 'app-full-page',
   templateUrl: './full-page.component.html',
   styleUrls: ['./full-page.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FullPageComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

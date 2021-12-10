@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
-
-// // RxJs
 import { EMPTY, from, OperatorFunction } from 'rxjs';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import {
   mergeMap,
   tap,
@@ -12,25 +12,19 @@ import {
   filter,
 } from 'rxjs/operators';
 
-// NgRx
-import { Store } from '@ngrx/store';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-
 // Services
-import StorageProvider from '../../shared/services/storage-providers/StorageProvider';
+import StorageProvider from '@app/shared/services/storage-providers/StorageProvider';
 
 // Actions
+import { Episode } from '../episode.models';
+import { selectEpisodeState } from './episode.selectors';
+import { episodeHasChanges } from '../episode.utils';
 import {
   createEpisodeAction,
   loadEpisodeAction,
   loadEpisodeSuccessAction,
-  saveEpisodeSuccessAction
+  saveEpisodeSuccessAction,
 } from './episode.actions';
-
-import { Episode } from '../episode.models';
-import { selectEpisodeState } from './episode.selectors';
-import { episodeHasChanges } from '../episode.utils';
-
 
 @Injectable()
 export class EpisodeEffects {
@@ -38,6 +32,135 @@ export class EpisodeEffects {
 
   stopSavingChanges = false;
   hasLoadedOrCreated = false;
+
+  createEpisode$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(createEpisodeAction),
+      mergeMap((action) =>
+        from(this.storageProvider.createEpisode(action.episodeLocation)).pipe(
+          // Don't Propagate Episode if it is undefined
+          filter((episode) => episode !== undefined) as OperatorFunction<
+            Episode | undefined,
+            Episode
+          >,
+          this.suspendSave,
+          map((episode) =>
+            loadEpisodeSuccessAction({
+              episode,
+              episodeLocation: action.episodeLocation,
+            }),
+          ), // We call "Load" here because we are loading the newly-created episode
+          catchError((e) => {
+            console.log('FAILED TO CREATE EPISODE!!!!');
+            console.log(e);
+            return EMPTY;
+          }),
+        ),
+      ),
+    ),
+  );
+
+  loadEpisode$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loadEpisodeAction),
+      mergeMap((action) =>
+        from(this.storageProvider.loadEpisode(action.episodeLocation)).pipe(
+          // Don't Propigate Episode if it is undefined
+          filter((episode) => episode !== undefined) as OperatorFunction<
+            Episode | undefined,
+            Episode
+          >,
+          this.suspendSave,
+          map((episode) =>
+            loadEpisodeSuccessAction({
+              episode,
+              episodeLocation: action.episodeLocation,
+            }),
+          ),
+          catchError((e) => {
+            console.log('FAILED TO LOAD EPISODE!!!!');
+            console.log(e);
+            return EMPTY;
+          }),
+        ),
+      ),
+    ),
+  );
+
+  loadEpisodeSucceeded$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(loadEpisodeSuccessAction),
+        tap((action) => {
+          // Resume saving changes
+          this.stopSavingChanges = false;
+          console.log('Allowing save.');
+        }),
+      ),
+    { dispatch: false },
+  );
+
+  isFirstTime = true;
+
+  saveEpisode$ = createEffect(() =>
+    this.store.select(selectEpisodeState).pipe(
+      startWith(undefined),
+
+      // Don't do anything in this pipeline of saving is suspended
+      filter((episode) => {
+        if (!this.hasLoadedOrCreated) {
+          console.log(
+            'Saving prevented. Episode has not loaded or been created yet.',
+          );
+          return false;
+        }
+        if (this.stopSavingChanges) {
+          console.log(
+            'Saving prevented. Episode is currently creating or loading.',
+          );
+          return false;
+        }
+        return true;
+      }),
+
+      // Get before-and-after
+      pairwise(),
+
+      // TODO: Perhaps want to know whether the episode is being loaded
+      // Don't want to save what is already loading
+
+      // Filter out store changes that don't affect episode state
+      filter(([before, after]) => episodeHasChanges(before, after)),
+
+      // Just get the "after"
+      // We don't care *what* changed
+      map(([before, after]) => after),
+
+      // Filter out situations where 'after' is undefined
+      // Which... should never happen.
+      // But the typescript compiler doesn't know that
+      filter((after) => after !== undefined) as OperatorFunction<
+        Episode | undefined,
+        Episode
+      >,
+
+      tap((action) => {
+        console.log('Saving...');
+      }),
+
+      // Do the actual saving
+      mergeMap((after) =>
+        from(this.storageProvider.saveEpisode(after)).pipe(
+          map(() => saveEpisodeSuccessAction()),
+          catchError((e) => {
+            console.log('FAILED TO SAVE EPISODE!!!!');
+            console.log(e);
+            return EMPTY;
+          }),
+        ),
+      ),
+    ),
+  );
 
   //#region Helpers
 
@@ -56,124 +179,9 @@ export class EpisodeEffects {
 
   //#endregion
 
-  createEpisode$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(createEpisodeAction),
-      mergeMap((action) =>
-
-         from(this.storageProvider.createEpisode(action.episodeLocation)).pipe(
-          // Don't Propigate Episode if it is undefined
-          filter((episode) => episode !== undefined) as OperatorFunction<
-          Episode | undefined,
-          Episode
-          >,
-          this.suspendSave,
-          map((episode) => loadEpisodeSuccessAction({ episode, episodeLocation: action.episodeLocation })), // We call "Load" here because we are loading the newly-created episode
-          catchError((e) => {
-            console.log('FAILED TO CREATE EPISODE!!!!');
-            console.log(e);
-            return EMPTY;
-          })
-        )
-      )
-    )
-  );
-
-  loadEpisode$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(loadEpisodeAction),
-      mergeMap((action) =>
-        from(this.storageProvider.loadEpisode(action.episodeLocation)).pipe(
-          // Don't Propigate Episode if it is undefined
-          filter((episode) => episode !== undefined) as OperatorFunction<
-          Episode | undefined,
-          Episode
-          >,
-          this.suspendSave,
-          map((episode) => loadEpisodeSuccessAction({ episode, episodeLocation: action.episodeLocation })),
-          catchError((e) => {
-            console.log('FAILED TO LOAD EPISODE!!!!');
-            console.log(e);
-            return EMPTY;
-          })
-        )
-      )
-    )
-  );
-
-  loadEpisodeSucceeded$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(loadEpisodeSuccessAction),
-      tap(action => {
-        // Resume saving changes
-        this.stopSavingChanges = false;
-        console.log('Allowing save.');
-      }),
-    ),
-    { dispatch: false });
-
-  isFirstTime = true;
-
-  saveEpisode$ = createEffect(
-    () =>
-      this.store.select(selectEpisodeState).pipe(
-        startWith(undefined),
-
-        // Don't do anything in this pipeline of saving is suspended
-        filter(episode => {
-          if(!this.hasLoadedOrCreated) {
-            console.log('Saving prevented. Episode has not loaded or been created yet.');
-            return false;
-          }
-          if(this.stopSavingChanges) {
-            console.log('Saving prevented. Episode is currently creating or loading.');
-            return false;
-          }
-          return true;
-        }),
-
-        // Get before-and-after
-        pairwise(),
-
-        // TODO: Perhaps want to know whether the episode is being loaded
-        // Don't want to save what is already loading
-
-        // Filter out store changes that don't affect episode state
-        filter(([before, after]) => episodeHasChanges(before, after)),
-
-        // Just get the "after"
-        // We don't care *what* changed
-        map(([before, after]) => after),
-
-        // Filter out situations where 'after' is undefined
-        // Which... should never happen.
-        // But the typescript compiler doesn't know that
-        filter((after) => after !== undefined) as OperatorFunction<
-        Episode | undefined,
-        Episode
-        >,
-
-        tap(action => {
-          console.log('Saving...');
-        }),
-
-        // Do the actual saving
-        mergeMap((after) =>
-          from(this.storageProvider.saveEpisode(after)).pipe(
-            map(() => saveEpisodeSuccessAction()),
-            catchError((e) => {
-              console.log('FAILED TO SAVE EPISODE!!!!');
-              console.log(e);
-              return EMPTY;
-            })
-          )
-        )
-      )
-  );
-
   constructor(
     private store: Store,
     private actions$: Actions,
-    @Inject('StorageProvider') private storageProvider: StorageProvider
+    @Inject('StorageProvider') private storageProvider: StorageProvider,
   ) {}
 }

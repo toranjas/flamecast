@@ -3,5 +3,5 @@ import { Episode } from '../episode.models';
 
 export const selectEpisodeState = createSelector(
   createFeatureSelector('episode'),
-  (state: Episode) => state
+  (state: Episode) => state,
 );

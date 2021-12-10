@@ -4,13 +4,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   selector: 'app-project-page',
   templateUrl: './project-page.component.html',
   styleUrls: ['./project-page.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectPageComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
