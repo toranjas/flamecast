@@ -22,7 +22,8 @@
     ],
     "paths": {
       "@app/*": ["src/app/*"],
-      "@env/*": ["src/environments/*"]
+      "@env/*": ["src/environments/*"],
+      "@toranjas/albedo/*": ["_albedo/*"],
     }
   },
   "exclude": [
