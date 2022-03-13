@@ -4,4 +4,23 @@
   </h1>
 
   <a routerLink="/" class="fc-link">{{ 'PAGES.DETAIL.BACK_TO_HOME' | translate }}</a>
+
+
+  <h2>Input</h2>
+  <select name="input-device-select"  (change)="selectedInputChanged($event)" >
+    <option *ngFor="let input of inputs$ | async;" id="{{ input.id }}"
+      [attr.selected]="input.isSelected ? 'selected' : null">
+      {{ input.name }}
+    </option>
+  </select>
+
+  <h2>Outputs</h2>
+  <select name="output-device-select"  (change)="selectedOutputChanged($event)">
+    <option *ngFor="let output of outputs$ | async;" id="{{ output.id }}"
+      [attr.selected]="output.isSelected ? 'selected' : null">
+      {{ output.name }}
+    </option>
+  </select>
+
+
 </app-project-page>
