@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { changeSelectedMediaInputAction, changeSelectedMediaOutputAction } from '@app/media-control/store/media-control.actions';
 import { selectInputs, selectOutputs } from '@app/media-control/store/media-control.selectors';
 import { Store } from '@ngrx/store';
 import { startWith, tap } from 'rxjs/operators';
@@ -17,5 +18,31 @@ export class RecordComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  // ----- DEVICE ----- //
+
+  getSelectedOptionId = (options: HTMLCollection) => {
+    if (!options) return null;
+    if (options.length === 0) return null;
+    return options[0].id;
+  };
+
+  selectedInputChanged = ($event: any) => {
+    console.log('Inputs changed', $event.target.selectedOptions);
+    this.store.dispatch(
+      changeSelectedMediaInputAction({
+        selectedId: this.getSelectedOptionId($event.target.selectedOptions),
+      })
+    );
+  };
+
+  selectedOutputChanged = ($event: any) => {
+    console.log('Outputs changed', $event.target.selectedOptions);
+    this.store.dispatch(
+      changeSelectedMediaOutputAction({
+        selectedId: this.getSelectedOptionId($event.target.selectedOptions),
+      })
+    );
+  };
 
 }
