@@ -22,7 +22,7 @@
   }
 
   .nav-wrapper {
-    width: 86px;
+    width: var(--nav-bar-width);
   }
 
   .content-wrapper {

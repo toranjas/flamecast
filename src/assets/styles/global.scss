@@ -1,8 +1,13 @@
-@import "./themes/default-dark.scss";
-@import "primeflex/primeflex.scss";
-@import "./fragments/reset";
-@import "./fragments/colors";
-@import "./fragments/typography";
+@import './themes/default-dark.scss';
+@import 'primeflex/primeflex.scss';
+@import './fragments/reset';
+@import './fragments/colors';
+@import './fragments/typography';
+@import './fragments/utilities';
+
+:root {
+  --nav-bar-width: 72px;
+}
 
 html {
   /* 10px */
