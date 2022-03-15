@@ -1,12 +1,17 @@
 import { createReducer, on } from "@ngrx/store";
 import { InputDevice, OutputDevice } from "./../../../_albedo/audio";
-import { refreshMediaInputsSucceededAction, changeSelectedMediaInputAction, refreshMediaOutputsSucceededAction, changeSelectedMediaOutputAction } from "./media-control.actions";
+import { refreshMediaInputsSucceededAction, changeSelectedMediaInputAction, refreshMediaOutputsSucceededAction, changeSelectedMediaOutputAction, changeInputGainAction, changeInputIsMutedAction } from "./media-control.actions";
 
 export interface MediaControlState {
 
+  // Input
   inputs: Array<InputDevice>;
   selectedInputId: string | null;
 
+  inputGain: number,
+  inputIsMuted: boolean;
+
+  // Output
   outputs: Array<OutputDevice>;
   selectedOutputId: string | null;
 
@@ -15,9 +20,13 @@ export interface MediaControlState {
 
 const initialState: MediaControlState = {
 
+  // Input
   inputs: [],
   selectedInputId: null,
-  
+  inputGain: 1.0,
+  inputIsMuted: false,
+
+  //Output
   outputs: [],
   selectedOutputId: null,
 
@@ -55,4 +64,23 @@ export const mediaControlReducer = createReducer(
       selectedOutputId: selectedId,
     };
   }),
+
+
+  on(changeInputGainAction, (state, { gain }) => {
+    return {
+      ...state,
+      inputGain: gain,
+    };
+  }),
+
+  on(changeInputIsMutedAction, (state, { isMuted }) => {
+    return {
+      ...state,
+      inputIsMuted: isMuted,
+    };
+  }),
+
+
+
+
 );

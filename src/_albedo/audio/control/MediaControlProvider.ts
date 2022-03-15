@@ -13,7 +13,7 @@ export interface MeteringCallback {
   (meteringData: MeteringData): void;
 }
 
-export default interface MediaControlProvider {
+export interface MediaControlProvider {
 
   // Input
   audioInputId: string | null;

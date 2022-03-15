@@ -1,8 +1,10 @@
 import { PcmFloat32Samples } from "./../samples/PcmFloat32Samples";
-import MediaControlProvider, { MeteringCallback } from "./MediaControlProvider";
+import { MediaControlProvider, MeteringCallback } from "./MediaControlProvider";
 
 export class WebAudioApiMediaControlProvider implements MediaControlProvider {
-  constructor() {}
+  constructor() {
+    console.log('Creating instance of WebAudioApiMediaControlProvider.');
+  }
 
   // ██ ███    ██ ██████  ██    ██ ████████
   // ██ ████   ██ ██   ██ ██    ██    ██
@@ -150,7 +152,7 @@ export class WebAudioApiMediaControlProvider implements MediaControlProvider {
       this._audioContext.createMediaStreamSource(inputMediaStream);
     this._inputGainNode = this._audioContext.createGain();
     this._inputScriptProcessorNode = this._audioContext.createScriptProcessor(
-      4096,
+      4096 * 2,
       2,
       2,
     );
@@ -169,6 +171,7 @@ export class WebAudioApiMediaControlProvider implements MediaControlProvider {
     // Connect Nodes
     console.log('Connecting nodes.');
     this._inputNode.connect(this._inputGainNode);
+    this._inputGainNode.connect(this._inputScriptProcessorNode);
     this._inputScriptProcessorNode.connect(
       this._inputScriptProcessorNodeZeroGain,
     );
@@ -184,7 +187,7 @@ export class WebAudioApiMediaControlProvider implements MediaControlProvider {
     // TODO: For extra features
     // this._inputGainNode.connect(this._inputAnalyzerNode);
     // this._inputGainNode.connect(this._monitoringGainNode);
-    // this._inputGainNode.connect(this._inputMeterScriptProcessorNode);
+
     // this._inputGainNode.connect(this._inputRecordScriptProcessorNode);
 
     // this._inputRecordScriptProcessorNode.connect(this._inputScriptProcessorNodeZeroGain);
@@ -238,7 +241,7 @@ export class WebAudioApiMediaControlProvider implements MediaControlProvider {
   };
 
   private setupInputScriptProcessorNode = () => {
-        // https://jameshfisher.com/2021/01/18/measuring-audio-volume-in-javascript/
+    // https://jameshfisher.com/2021/01/18/measuring-audio-volume-in-javascript/
 
     // // Metering (Analyzer)
     // this._inputAnalyzerNode.fftSize = 256;
@@ -248,7 +251,7 @@ export class WebAudioApiMediaControlProvider implements MediaControlProvider {
 
     // this._inputAnalyzerNode.getByteFrequencyData(dataArray);
 
-        // ScriptProcessorNode is depricated and considered bad practice.
+    // ScriptProcessorNode is depricated and considered bad practice.
     // However, there are the most number of examples using this method.
     // It also seems easiest.
 
@@ -271,16 +274,13 @@ export class WebAudioApiMediaControlProvider implements MediaControlProvider {
         const inputData = inputBuffer.getChannelData(channel);
         var peak = PcmFloat32Samples.getPeak(inputData);
 
-
         if (channel === 0) {
-          
           leftCurrentPeakDBFS = PcmFloat32Samples.toDBFS(peak);
           leftIsClipping = PcmFloat32Samples.isClipping(peak);
         } else if (channel === 1) {
           rightCurrentPeakDBFS = PcmFloat32Samples.toDBFS(peak);
           rightIsClipping = PcmFloat32Samples.isClipping(peak);
         }
-
       }
 
       if (this._inputMeteringCallback) {
@@ -288,15 +288,11 @@ export class WebAudioApiMediaControlProvider implements MediaControlProvider {
           leftCurrentPeakDBFS,
           rightCurrentPeakDBFS,
           leftHoldPeakDBFS: 0, // TODO:
-          rightHoldPeakDBFS: 0,// TODO:
+          rightHoldPeakDBFS: 0, // TODO:
           leftIsClipping,
           rightIsClipping,
         });
       }
-
-      
-
-    }
-
+    };
   };
 }
