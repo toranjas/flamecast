@@ -17,9 +17,10 @@ export module dBFullScaleSamples {
     minMeterValue: number, 
     maxMeterValue: number): number => {
 
-      // SH: This constant is suspect. Treat as such.
-      // Need to find out what the lowest dBFS should actually be
-      const dBFSMin = -96.0;
+      
+      // Audacity goes from -60dBFS to 0dBFS.
+      // Probably good enough for us.
+      const dBFSMin = -60.0;
       if (dBFS < dBFSMin) {
         dBFS = dBFSMin;
       }

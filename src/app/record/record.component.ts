@@ -130,7 +130,7 @@ export class RecordComponent implements OnInit, AfterViewInit {
     dBFS: number,
   ) => {
     if(span){
-      span.nativeElement.textContent = dBFS.toFixed(2);
+      span.nativeElement.textContent = Math.max(-60, dBFS).toFixed(0);
     }
   };
 }
