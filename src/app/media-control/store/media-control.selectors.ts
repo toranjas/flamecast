@@ -37,3 +37,18 @@ export const selectSelectedDeviceIds = createSelector(
     selectedOutputId: state.selectedOutputId,
   }),
 );
+
+export const selectInputGain = createSelector(
+  createFeatureSelector('mediaControl'),
+  (state: MediaControlState) => ({
+    gain: state.inputGain
+  })
+);
+
+export const selectInputIsMuted = createSelector(
+  createFeatureSelector('mediaControl'),
+  (state: MediaControlState) => ({
+    isMuted: state.inputIsMuted
+  })
+);
+
