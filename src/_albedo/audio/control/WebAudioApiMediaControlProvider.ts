@@ -1,10 +1,15 @@
+import { async } from "@angular/core/testing";
 import { PcmFloat32Samples } from "./../samples/PcmFloat32Samples";
 import { MediaControlProvider, MeteringCallback } from "./MediaControlProvider";
+import { MediaControlUtils } from "./MediaControlUtils";
 
 export class WebAudioApiMediaControlProvider implements MediaControlProvider {
   constructor() {
     console.log('Creating instance of WebAudioApiMediaControlProvider.');
   }
+
+  private VIDEO_COMPONENT_SELECTOR = "#video-control-for-media-control-provider";
+
 
   // ██ ███    ██ ██████  ██    ██ ████████
   // ██ ████   ██ ██   ██ ██    ██    ██
@@ -13,7 +18,7 @@ export class WebAudioApiMediaControlProvider implements MediaControlProvider {
   // ██ ██   ████ ██       ██████     ██
 
   // Device
-  private _audioInputId: string | null = null;
+  private _audioInputId: string | null = "default";
 
   get audioInputId(): string | null {
     return this._audioInputId;
@@ -74,7 +79,7 @@ export class WebAudioApiMediaControlProvider implements MediaControlProvider {
   // ██    ██ ██    ██    ██    ██      ██    ██    ██
   //  ██████   ██████     ██    ██       ██████     ██
 
-  private _audioOutputId: string | null = null;
+  private _audioOutputId: string | null = "default";
 
   get audioOutputId(): string | null {
     return this._audioOutputId;
@@ -82,11 +87,8 @@ export class WebAudioApiMediaControlProvider implements MediaControlProvider {
 
   set audioOutputId(deviceId: string | null) {
     this._audioOutputId = deviceId;
-
-    // TODO: FOR OUTPUT, THIS MUST BE RE-ENABLED!!!!
-    // This is an async call. Treated as fire-and-forget because this property setter is sync.
-    //this.setupOutputElement();
   }
+
 
   //  █████  ██    ██ ██████  ██  ██████       ██████  ██████   █████  ██████  ██   ██
   // ██   ██ ██    ██ ██   ██ ██ ██    ██     ██       ██   ██ ██   ██ ██   ██ ██   ██
@@ -109,6 +111,14 @@ export class WebAudioApiMediaControlProvider implements MediaControlProvider {
 
   // Output
   private _outputNode: AudioDestinationNode | null = null;
+  private _outputVideoElement: HTMLVideoElement = document.querySelector(this.VIDEO_COMPONENT_SELECTOR);
+
+
+  // Initialization
+  private _isInitialized: boolean = false;
+  private _lastAudioInputId: string | null = null;
+  private _lastAudioOutputId: string | null = null;
+
 
   setupAudioGraph = async () => {
     console.log('Setting up audio pipeline.');
@@ -118,21 +128,53 @@ export class WebAudioApiMediaControlProvider implements MediaControlProvider {
       throw new Error('Audio input id is null');
     }
 
-    // TODO: Uncomment when doing audio output
-    // // SH: Not sure we really care at this point
-    // if (this._audioOutputId === null) {
-    //   console.log('Audio output id is null');
-    //   throw new Error('Audio output id is null');
-    // }
+    if (this._audioOutputId === null) {
+      console.log('Audio output id is null');
+      throw new Error('Audio output id is null');
+    }
 
-    // // Set it to the videoElement. This is what allows us to change the output.
-    // if (!this._outputVideoElement) {
-    //   console.log('Creating reference to video element.');
-    //   this._outputVideoElement = document.querySelector('video');
-    //   if (!this._outputVideoElement) {
-    //     throw new Error('video element not defined.');
-    //   }
-    // }
+    // Set it to the videoElement. This is what allows us to change the output.
+    if (!this._outputVideoElement) {
+      console.log(`Creating reference to video element "${this.VIDEO_COMPONENT_SELECTOR}"`);
+      this._outputVideoElement = document.querySelector(
+        this.VIDEO_COMPONENT_SELECTOR,
+      );
+      console.log("Foo", document.querySelector(
+        'video-control-for-media-control-provider',
+      ));
+      if (!this._outputVideoElement) {
+        throw new Error(`video element "${this.VIDEO_COMPONENT_SELECTOR}" not defined.`);
+      }
+    }
+
+    // Perform a full or partial initialization
+    if(!this._isInitialized) {
+      console.log("Attempting full initialization.");
+      await this.fullInitialize();
+    }
+    else {
+      console.log("Checking if partial initialization is needed.");
+      if(this._audioInputId !== this._lastAudioInputId) {
+        console.log("Attempting to set up the input element.");
+        await this.setupInputElement();
+      }
+      if(this._audioOutputId != this._lastAudioOutputId) {
+        console.log("Attempting to set up the output element.");
+        await this.setupOutputElement();
+      }
+
+
+    }
+
+    // Set the variables for next time setupAudioGraph() is called
+    this._isInitialized = true;
+    this._lastAudioInputId = this._audioInputId;
+    this._lastAudioOutputId = this._audioOutputId;
+
+  };
+
+  private fullInitialize = async() => {
+    
 
     // Build an Audio Context
     console.log('Building audio context.');
@@ -148,8 +190,7 @@ export class WebAudioApiMediaControlProvider implements MediaControlProvider {
 
     // Build Nodes
     console.log('Building nodes.');
-    this._inputNode =
-      this._audioContext.createMediaStreamSource(inputMediaStream);
+    this._inputNode = this._audioContext.createMediaStreamSource(inputMediaStream);
     this._inputGainNode = this._audioContext.createGain();
     this._inputScriptProcessorNode = this._audioContext.createScriptProcessor(
       4096 * 2,
@@ -198,12 +239,36 @@ export class WebAudioApiMediaControlProvider implements MediaControlProvider {
     // Metering
     // this.setupMetering();
 
-    // TODO:
     // Setup Output
-    // console.log('Configuring output video element.');
-    // this._outputVideoElement.srcObject = outputMediaStream.stream;
-    // await this.setupOutputElement();
-  };
+     console.log('Configuring output video element.');
+    this._outputVideoElement.srcObject = outputMediaStream.stream;
+    await this.setupOutputElement();
+
+
+  }
+
+  private setupInputElement = async () => {
+    // This changes a bunch of things after initialization
+
+    // Unhook the previous inputNode instance
+    this._inputNode.disconnect(this._inputGainNode);
+
+    // Create a new input media stream and new inputNode
+    const inputMediaStream = await this.getInputMediaStream();
+    this._inputNode = this._audioContext.createMediaStreamSource(inputMediaStream);
+
+    // Hook the new inputNode instance
+    this._inputNode.connect(this._inputGainNode);
+
+  }
+
+  private setupOutputElement = async () => {
+    if (this._outputVideoElement) {
+      await MediaControlUtils.attachSinkId(this._outputVideoElement, this._audioOutputId);
+    } else {
+      console.log('Could not setup output element. output element is null.');
+    }
+  };  
 
   private _runningInputMediaStream: MediaStream | null = null;
 
@@ -296,3 +361,5 @@ export class WebAudioApiMediaControlProvider implements MediaControlProvider {
     };
   };
 }
+
+
