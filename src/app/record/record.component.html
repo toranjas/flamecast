@@ -13,6 +13,7 @@
       {{ input.name }}
     </option>
   </select>
+
   <br />
 
   <label for="gain-range"> Gain</label>
@@ -34,7 +35,6 @@
 
   L: <progress value="0" max="100" data-label="50% Complete" #inputLeftProgress></progress><span #inputLeftValue></span><br>
   R: <progress value="0" max="100" data-label="50% Complete" #inputRightProgress></progress><span #inputRightValue></span><br>
- 
 
   <h2>Outputs</h2>
   <select name="output-device-select"  (change)="selectedOutputChanged($event)">

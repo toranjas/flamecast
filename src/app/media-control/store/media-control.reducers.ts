@@ -65,7 +65,6 @@ export const mediaControlReducer = createReducer(
     };
   }),
 
-
   on(changeInputGainAction, (state, { gain }) => {
     return {
       ...state,
@@ -79,8 +78,5 @@ export const mediaControlReducer = createReducer(
       inputIsMuted: isMuted,
     };
   }),
-
-
-
 
 );

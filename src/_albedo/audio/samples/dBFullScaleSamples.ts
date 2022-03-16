@@ -17,10 +17,10 @@ export module dBFullScaleSamples {
     minMeterValue: number, 
     maxMeterValue: number): number => {
 
-      
       // Audacity goes from -60dBFS to 0dBFS.
       // Probably good enough for us.
       const dBFSMin = -60.0;
+
       if (dBFS < dBFSMin) {
         dBFS = dBFSMin;
       }

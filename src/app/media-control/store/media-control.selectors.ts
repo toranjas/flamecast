@@ -38,10 +38,6 @@ export const selectSelectedDeviceIds = createSelector(
   }),
 );
 
-
-
-
-
 export const selectInputGain = createSelector(
   createFeatureSelector('mediaControl'),
   (state: MediaControlState) => ({

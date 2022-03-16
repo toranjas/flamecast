@@ -2,6 +2,7 @@ import { createAction, props } from "@ngrx/store"
 import { InputDevice, OutputDevice } from "./../../../_albedo/audio";
 
 // Input
+
 export const refreshMediaInputsAction = createAction(
   '[Media Control] Refresh Inputs'
 )

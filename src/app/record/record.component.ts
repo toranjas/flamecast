@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { map, startWith, tap } from 'rxjs/operators';
 import { MediaControlProvider, MeteringData, dBFullScaleSamples } from './../../_albedo/audio';
 
+
 @Component({
   templateUrl: './record.component.html',
   styleUrls: ['./record.component.scss'],
@@ -72,6 +73,7 @@ export class RecordComponent implements OnInit, AfterViewInit {
     this.store.dispatch(
       changeSelectedMediaOutputAction({
         selectedId: this.getSelectedOptionId($event.target.selectedOptions),
+
       }),
     );
   };
@@ -133,4 +135,5 @@ export class RecordComponent implements OnInit, AfterViewInit {
       span.nativeElement.textContent = Math.max(-60, dBFS).toFixed(0);
     }
   };
+
 }
