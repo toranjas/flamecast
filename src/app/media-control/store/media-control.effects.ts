@@ -14,7 +14,16 @@ export class MediaControlEffects {
     private actions$: Actions,
     @Inject('MediaControlProvider')
     private mediaControlProvider: MediaControlProvider
-  ) {}
+  ) {
+
+    // Fire-and-forget setup of the audio graph with default values.
+    // Not sure if this is the best way or the best place.
+    // Maybe there is a way to pull the initial value from the store? 
+    // Or from configuration?
+    // For now, this is probably okay but won't be good enough for RTM.
+    this.mediaControlProvider.setupAudioGraph();
+
+  }
 
   // ██      ██ ███████ ████████
   // ██      ██ ██         ██
