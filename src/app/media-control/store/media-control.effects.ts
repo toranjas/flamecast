@@ -14,6 +14,7 @@ export class MediaControlEffects {
     private actions$: Actions,
     @Inject('MediaControlProvider')
     private mediaControlProvider: MediaControlProvider
+
   ) {
 
     // Fire-and-forget setup of the audio graph with default values.
