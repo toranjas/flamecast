@@ -23,8 +23,9 @@
 
       <div class="p-field">
         <label for="username1" class="fc-body">Example Field</label>
-        <input id="username1" class="p-inputtext-lg" aria-describedby="username1-help" pInputText [(ngModel)]="value4" />
-        <small id="username1-help" class="fc-description">This is an example field</small>
+        <input id="username1" class="p-inputtext-lg" aria-describedby="username1-help" pInputText
+          [(ngModel)]="value4" />
+          <small id="username1-help" class="fc-description">This is an example field</small>
       </div>
 
       <div class="field-checkbox">
@@ -35,6 +36,22 @@
       <button pButton pRipple type="button" label="Primary" class="p-button-rounded p-button-sm"></button>
       <button pButton pRipple type="button" label="Primary" class="p-button-rounded"></button>
       <button pButton pRipple type="button" label="Primary" class="p-button-rounded p-button-lg"></button>
+
+      <hr>
+      <h2>Shaun's Mocking</h2>
+
+      
+      <div class="p-field">
+        <label for="episode-location" class="fc-body">Episode Location</label>
+        <input id="episode-location" class="p-inputtext-lg" aria-describedby="episode-location-help" pInputText
+          [(ngModel)]="value4" [value]="episodeIdentifier" (input)="episodeIdentifierChange($event)"
+          style="width: 600px;" />
+        <small id="episode-location-help" class="fc-description">Directory path to the episode.</small>
+      </div>
+      
+      <button pButton pRipple type="button" label="Create Episode" class="p-button-rounded p-button-lg"
+        (click)="createEpisode()"></button>
+
 
     </div>
   </div>
