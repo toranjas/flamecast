@@ -1,6 +1,8 @@
 {
   "name": "flamecast",
   "version": "0.0.1",
+  "description": "Friendly podcast authoring software",
+  "author": "FlameCast.com",
   "main": "output/main.js",
   "private": true,
   "dependencies": {
