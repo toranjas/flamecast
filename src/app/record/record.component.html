@@ -4,4 +4,45 @@
   </h1>
 
   <a routerLink="/" class="fc-link">{{ 'PAGES.DETAIL.BACK_TO_HOME' | translate }}</a>
+
+
+  <h2>Input</h2>
+  <select name="input-device-select"  (change)="selectedInputChanged($event)" >
+    <option *ngFor="let input of inputs$ | async;" id="{{ input.id }}"
+      [attr.selected]="input.isSelected ? 'selected' : null">
+      {{ input.name }}
+    </option>
+  </select>
+
+  <br />
+
+  <label for="gain-range"> Gain</label>
+  <input id="gain-range" type="range" min="0" max="1.25" step="0.01" class="slider"
+  style="width: 300px;"
+  [value]="inputGain$ | async"
+  (input)="inputGainChanged($event)">
+  <label for="gain-range">{{ inputGain$ | async }}</label>
+  <br />
+  
+  
+  <input
+    id="is-muted-checkbox"
+    type="checkbox"
+    [checked]="inputIsMuted$ | async"
+    (change)="inputIsMutedChanged($event)"/>
+  <label for="is-muted-checkbox"> Is Muted</label>
+  <br>
+
+  L: <progress value="0" max="100" data-label="50% Complete" #inputLeftProgress></progress><span #inputLeftValue></span><br>
+  R: <progress value="0" max="100" data-label="50% Complete" #inputRightProgress></progress><span #inputRightValue></span><br>
+
+  <h2>Outputs</h2>
+  <select name="output-device-select"  (change)="selectedOutputChanged($event)">
+    <option *ngFor="let output of outputs$ | async;" id="{{ output.id }}"
+      [attr.selected]="output.isSelected ? 'selected' : null">
+      {{ output.name }}
+    </option>
+  </select>
+
+
 </app-project-page>
