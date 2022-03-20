@@ -50,6 +50,7 @@ export class ElectronFileSystemStorageProviderService
   };
 
   saveMostRecentlyUsedItem = async (item: MostRecentlyUsedItem) => {
+    console.log('Saving most recently used item.', item);
     const response = await this.ipcRenderer.invoke(
       'file-system-save-most-recently-used-item',
       item.episodeId,
@@ -59,6 +60,7 @@ export class ElectronFileSystemStorageProviderService
   };
 
   loadMostRecentlyUsedItems = async () => {
+    console.log('Loading most recently used items.');
     const response = await this.ipcRenderer.invoke(
       'file-system-load-most-recently-used-items',
     );

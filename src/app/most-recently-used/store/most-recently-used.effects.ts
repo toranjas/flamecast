@@ -16,8 +16,8 @@ import {
 import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-// // Services
-import StorageProvider from 'src/app/shared/services/storage-providers/StorageProvider';
+// Services
+import StorageProvider from '@app/shared/services/storage-providers/StorageProvider';
 
 // Actions
 import { loadEpisodeSuccessAction } from '../../episode/store/episode.actions';
