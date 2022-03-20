@@ -20,6 +20,7 @@
       <div class="fc-description">Description</div>
 
       <a routerLink="/information" class="fc-link">{{ 'PAGES.HOME.GO_TO_DETAIL' | translate }}</a>
+      <a routerLink="create-episode" class="fc-link">Create New Episode</a>
 
       <div class="p-field">
         <label for="username1" class="fc-body">Example Field</label>
@@ -40,7 +41,7 @@
       <hr>
       <h2>Shaun's Mocking</h2>
 
-      
+
       <div class="p-field">
         <label for="episode-location" class="fc-body">Episode Location</label>
         <input id="episode-location" class="p-inputtext-lg" aria-describedby="episode-location-help" pInputText
@@ -48,7 +49,7 @@
           style="width: 600px;" />
         <small id="episode-location-help" class="fc-description">Directory path to the episode.</small>
       </div>
-      
+
       <button pButton pRipple type="button" label="Create Episode" class="p-button-rounded p-button-lg"
         (click)="createEpisode()"></button>
         <button pButton pRipple type="button" label="Load Episode" class="p-button-rounded p-button-lg"
