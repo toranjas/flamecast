@@ -21,14 +21,14 @@ export interface Episode {
 }
 
 export interface EpisodeInfo {
-  showName: string;
-  title: string;
-  episodeNumber: string;
-  releaseDate: Date | undefined;
-  description: string;
-  author: string;
-  category: string;
-  copyright: string;
+  showName?: string;
+  title?: string;
+  episodeNumber?: string;
+  releaseDate?: Date;
+  description?: string;
+  author?: string;
+  category?: string;
+  copyright?: string;
 }
 
 export interface Segment extends OrderableItem {

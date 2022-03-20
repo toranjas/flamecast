@@ -1,9 +1,12 @@
 import { createAction, props } from '@ngrx/store';
-import { Episode } from '../episode.models';
+import { Episode, EpisodeInfo } from '../episode.models';
 
 export const createEpisodeAction = createAction(
   '[Episode] Create',
-  props<{ episodeLocation: string }>(),
+  props<{
+    episodeLocation: string;
+    episodeInfo?: EpisodeInfo;
+  }>(),
 );
 
 export const loadEpisodeAction = createAction(
