@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import * as EpisodeActions from './episode.actions';
 import * as EpisodeFunctions from './episode.reducer-functions';
-import * as InfoActions from   '../info/store/info.actions';
+import * as InfoActions from '../info/store/info.actions';
 import * as InfoFunctions from '../info/store/info.reducer-functions';
 import * as SegmentActions from '../segments/store/segments.actions';
 import * as SegmentFunctions from '../segments/store/segments.reducer-functions';
@@ -17,7 +17,10 @@ export const episodeReducer = createReducer(
 
   //#region Episode
 
-  on(EpisodeActions.loadEpisodeSuccessAction, EpisodeFunctions.loadEpisodeSuccess),
+  on(
+    EpisodeActions.loadEpisodeSuccessAction,
+    EpisodeFunctions.loadEpisodeSuccess,
+  ),
 
   //#endregion
 
@@ -29,7 +32,10 @@ export const episodeReducer = createReducer(
 
   //#region Segments
 
-  on(SegmentActions.changeSegmentPropertiesAction, SegmentFunctions.changeSegmentProperties),
+  on(
+    SegmentActions.changeSegmentPropertiesAction,
+    SegmentFunctions.changeSegmentProperties,
+  ),
   on(SegmentActions.createSegmentAction, SegmentFunctions.createSegment),
   on(SegmentActions.moveSegmentUpAction, SegmentFunctions.moveSegmentUp),
   on(SegmentActions.moveSegmentDownAction, SegmentFunctions.moveSegmentDown),
@@ -38,7 +44,10 @@ export const episodeReducer = createReducer(
 
   //#region Parts
 
-  on(PartActions.changePartPropertiesAction, PartFunctions.changePartProperties),
+  on(
+    PartActions.changePartPropertiesAction,
+    PartFunctions.changePartProperties,
+  ),
   on(PartActions.createPartAction, PartFunctions.createPart),
   on(PartActions.movePartUpAction, PartFunctions.movePartUp),
   on(PartActions.movePartDownAction, PartFunctions.movePartDown),
@@ -53,5 +62,4 @@ export const episodeReducer = createReducer(
   //#region Takes
 
   //#endregion
-
 );

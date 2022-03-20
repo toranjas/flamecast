@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { createEpisodeAction } from '@app/episode/store/episode.actions';
+import {
+  createEpisodeAction,
+  loadEpisodeAction,
+} from '@app/episode/store/episode.actions';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -8,9 +11,9 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-
-
-  episodeIdentifier: string = '';
+  // This is temporarily hard-coded for Shaun's benefit
+  episodeIdentifier =
+    '/home/shaun/Documents/podcasts/episode5/episode5.flamecast';
 
   // Initialization
   constructor(private store: Store) {}
@@ -23,10 +26,16 @@ export class HomeComponent implements OnInit {
   episodeIdentifierChange = ($event: any) => {
     this.episodeIdentifier = $event.target?.value ?? '';
   };
-    
+
   createEpisode = async () => {
     await this.store.dispatch(
       createEpisodeAction({ episodeLocation: this.episodeIdentifier }),
+    );
+  };
+
+  loadEpisode = async () => {
+    await this.store.dispatch(
+      loadEpisodeAction({ episodeLocation: this.episodeIdentifier }),
     );
   };
 }
