@@ -1,20 +1,17 @@
 export interface MeteringData {
-  leftCurrentPeakDBFS: number,
-  rightCurrentPeakDBFS: number,
+  leftCurrentPeakDBFS: number;
+  rightCurrentPeakDBFS: number;
 
-  leftHoldPeakDBFS: number,
-  rightHoldPeakDBFS: number,
+  leftHoldPeakDBFS: number;
+  rightHoldPeakDBFS: number;
 
-  leftIsClipping: boolean,
-  rightIsClipping: boolean
+  leftIsClipping: boolean;
+  rightIsClipping: boolean;
 }
 
-export interface MeteringCallback {
-  (meteringData: MeteringData): void;
-}
+export type MeteringCallback = (meteringData: MeteringData) => void;
 
 export interface MediaControlProvider {
-
   // Input
   audioInputId: string | null;
   audioInputGain: number;
@@ -24,10 +21,6 @@ export interface MediaControlProvider {
   // Output
   audioOutputId: string | null;
 
-  // Gain & Mute
-  
-
   // Setup
   setupAudioGraph: () => Promise<void>;
-
 }

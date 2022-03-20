@@ -1,11 +1,7 @@
-export module MediaControlUtils {
-
+export class MediaControlUtils {
   // Attach audio output device to video element using device/sink ID.
   // https://github.com/webrtc/samples/blob/gh-pages/src/content/devices/input-output/js/main.js
-  export const attachSinkId = async (
-    mediaElement: HTMLMediaElement,
-    sinkId: string | null
-  ) => {
+  static attachSinkId = async (mediaElement: HTMLMediaElement, sinkId: string | null) => {
     // To get around typescript not having the experimental sinkId and setSinkId definitions.
     const element: any = mediaElement;
 
@@ -24,5 +20,4 @@ export module MediaControlUtils {
       throw new Error(errorMessage);
     }
   };
-
 }

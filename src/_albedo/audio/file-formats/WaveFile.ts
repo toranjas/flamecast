@@ -20,8 +20,7 @@
 //     // a whole WAV file can be called a "chunk". I assume that this is because the
 //     // WAV format could be used internally within some other format so it might be a "chunk"
 //     // of that thing but not the whole file itself.
-//     // For Toranja's purposes, "chunk" and "file" are interchangeable. 
-
+//     // For Toranja's purposes, "chunk" and "file" are interchangeable.
 
 //     const length = numberOfSamples * bytesPerSample;
 
@@ -33,7 +32,7 @@
 
 //     /* Chunk Size */
 //     /* 4 Bytes, Unsigned 32-Bit Integer, Little Endian */
-    
+
 //     // SH: I don't fully understand this and there *seems* to be conflicting information.
 //     // On fileformat.com: "file size (integer). 	Size of the overall file - 8 bytes, in bytes (32-bit integer). Typically, you’d fill this in after creation."
 //     // On mcgill.ca:      "Chunk size: 4+n." n appears to be everything after "WAVE".
@@ -81,9 +80,6 @@
 //     /* Bits per sample */
 //     dataView.setUint16(34, 16, true);
 
-
-
 //   }
-
 
 // }

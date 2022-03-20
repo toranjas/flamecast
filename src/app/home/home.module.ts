@@ -10,9 +10,10 @@ import { FullPageModule } from '@app/layout/full-page/full-page.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { CreateEpisodeComponent } from './create-episode/create-episode.component';
+import { MostRecentlyUsedComponent } from '@app/most-recently-used/components/most-recently-used.component';
 
 @NgModule({
-  declarations: [HomeComponent, CreateEpisodeComponent],
+  declarations: [HomeComponent, CreateEpisodeComponent, MostRecentlyUsedComponent],
   imports: [
     CommonModule,
     SharedModule,
