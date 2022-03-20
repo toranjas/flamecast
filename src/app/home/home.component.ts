@@ -11,8 +11,8 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  // This is temporarily hard-coded for Shaun's benefit
   episodeIdentifier = '';
+  newEpisodeShowName = '';
 
   // Initialization
   constructor(private store: Store) {}
@@ -28,7 +28,12 @@ export class HomeComponent implements OnInit {
 
   createEpisode = async () => {
     await this.store.dispatch(
-      createEpisodeAction({ episodeLocation: this.episodeIdentifier }),
+      createEpisodeAction({
+        episodeLocation: this.episodeIdentifier,
+        episodeInfo: {
+          showName: this.newEpisodeShowName,
+        },
+      }),
     );
   };
 
@@ -36,5 +41,9 @@ export class HomeComponent implements OnInit {
     await this.store.dispatch(
       loadEpisodeAction({ episodeLocation: this.episodeIdentifier }),
     );
+  };
+
+  newEpisodeShowNameChange = ($event: any) => {
+    this.newEpisodeShowName = $event.target?.value ?? '';
   };
 }

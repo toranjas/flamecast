@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MostRecentlyUsedItem } from '@app/most-recently-used/most-recently-used.models';
-import { Episode } from '../../../episode/episode.models';
+import { Episode, EpisodeInfo } from '../../../episode/episode.models';
 import { emptyEpisode, emptyEpisodeInfo } from '../../../episode/episode.utils';
 import StorageProvider from './StorageProvider';
 
@@ -10,7 +10,8 @@ import StorageProvider from './StorageProvider';
 export class MockStorageProviderService implements StorageProvider {
   constructor() {}
 
-  createEpisode = async (episodeLocation: string) => emptyEpisode();
+  createEpisode = async (episodeLocation: string, episodeInfo?: EpisodeInfo) =>
+    emptyEpisode();
 
   saveEpisode = async (episode: Episode) => {
     // Do nothing

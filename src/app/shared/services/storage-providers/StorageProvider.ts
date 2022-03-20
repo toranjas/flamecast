@@ -1,8 +1,11 @@
 import { MostRecentlyUsedItem } from '@app/most-recently-used/most-recently-used.models';
-import { Episode } from '../../../episode/episode.models';
+import { Episode, EpisodeInfo } from '../../../episode/episode.models';
 
 export default interface StorageProvider {
-  createEpisode: (episodeLocation: string) => Promise<Episode | undefined>;
+  createEpisode: (
+    episodeLocation: string,
+    episodeInfo?: EpisodeInfo,
+  ) => Promise<Episode | undefined>;
 
   saveEpisode: (episode: Episode) => Promise<void>;
 
