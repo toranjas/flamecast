@@ -7,11 +7,13 @@
     <tr>
       <td>{{ mru.episodeLocation }}</td>
       <td>{{ mru.lastLoaded }}</td>
-      <td><button (click)="loadEpisode(mru.episodeLocation)">Load</button></td>
+      <td><button pButton pRipple type="button" label="Load" class="p-button-rounded p-button-sm"
+          (click)="loadEpisode(mru.episodeLocation)"></button></td>
     </tr>
   </tbody>
 </table>
-<button (click)="refreshMostRecentList()">Refresh</button>
+<button pButton pRipple type="button" label="Refresh" class="p-button-rounded p-button-sm"
+  (click)="refreshMostRecentList()"></button>
 <!-- <ul *ngFor="let mru of mostRecentlyUsedItems$ | async;">
   <li>{{ mru.episodeLocation }} {{ mru.lastLoaded }} </li>
 </ul> -->
