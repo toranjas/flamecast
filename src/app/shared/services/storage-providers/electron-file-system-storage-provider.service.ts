@@ -57,4 +57,25 @@ export class ElectronFileSystemStorageProviderService implements StorageProvider
     const response = await this.ipcRenderer.invoke('file-system-load-most-recently-used-items');
     return response;
   };
+
+  /**
+   * Opens a Select Folder native dialog
+   * https://medium.com/developer-rants/opening-system-dialogs-in-electron-from-the-renderer-6daf49782fd8
+   */
+  async openSelectFolderDialog(
+    title: string,
+    buttonLabel: string,
+  ): Promise<{ canceled: boolean; folder: string }> {
+    const { canceled, filePaths } = await this.ipcRenderer.invoke('file-system-open-dialog', {
+      title,
+      buttonLabel,
+      properties: ['openDirectory', 'createDirectory', 'promptToCreate'],
+    });
+    const folder = canceled ? '' : filePaths[0];
+
+    return {
+      canceled,
+      folder,
+    };
+  }
 }

@@ -14,4 +14,12 @@ export default interface StorageProvider {
   saveMostRecentlyUsedItem: (item: MostRecentlyUsedItem) => Promise<void>;
 
   loadMostRecentlyUsedItems: () => Promise<Array<MostRecentlyUsedItem>>;
+
+  openSelectFolderDialog: (
+    title: string,
+    buttonLabel: string,
+  ) => Promise<{
+    canceled: boolean;
+    folder: string;
+  }>;
 }

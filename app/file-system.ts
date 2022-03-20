@@ -1,9 +1,10 @@
-import { ipcMain, app } from 'electron';
+import { ipcMain, app, dialog } from 'electron';
 
 const fs = require('fs').promises;
 const fsSync = require('fs');
 const path = require('path');
 
+const EPISODE_FILE = 'episode.flamecast';
 let currentEpisodeLocation: string = '';
 
 export const initializeFileSystemHandlers = () => {
@@ -13,32 +14,42 @@ export const initializeFileSystemHandlers = () => {
   ipcMain.handle(
     'file-system-create-episode',
     async (e: any, episodeLocation: string, episode: object) => {
-      console.log('Creating episode.', episodeLocation);
+      console.log('Creating episode in folder:', episodeLocation);
 
-      if (!episodeLocation) throw new Error('Episode location is undefined or blank.');
-      if (episodeLocation.trim().length === 0) throw new Error('Episode location is blank.');
+      if (!episodeLocation) {
+        throw new Error('Episode location is undefined or blank.');
+      }
+      if (episodeLocation.trim().length === 0) {
+        throw new Error('Episode location is blank.');
+      }
 
-      const exists = fsSync.existsSync(episodeLocation);
-      if (exists) throw new Error('Episode already exists.');
+      const episodeFileLocation = path.resolve(episodeLocation, EPISODE_FILE);
+
+      // Check if episode file exists
+      if (fsSync.existsSync(episodeFileLocation)) {
+        throw new Error('Episode already exists.');
+      }
 
       // TODO: If another .flamecast file is in this directory, boom!
       // TODO: If episodeIdentifier isn't a valid path, BOOM!
 
       // Episode Identifier is the path to the file
-      const fullPathToFile = episodeLocation;
-      currentEpisodeLocation = episodeLocation;
+      //const fullPathToFile = episodeLocation;
+      currentEpisodeLocation = episodeFileLocation;
 
       // Make the directory
-      const directoryPath = path.dirname(fullPathToFile);
+      const directoryPath = path.dirname(episodeLocation);
       console.log('Making directory', directoryPath);
       var mkdirResponse = await fs.mkdir(directoryPath, { recursive: true });
       console.log('Directory created probably', mkdirResponse);
 
       // Make the file
       const jsonContents = JSON.stringify(episode, null, 2);
-      console.log('Writing file', fullPathToFile);
+      const fullPathIncludingFile = path.resolve(episodeLocation, 'episode.flamecast');
+      console.log('Writing file', fullPathIncludingFile);
       console.log("File's contents are: ", jsonContents);
-      var writeResponse = await fs.writeFile(fullPathToFile, jsonContents);
+
+      const writeResponse = await fs.writeFile(fullPathIncludingFile, jsonContents);
       console.log('File written probably.', writeResponse);
 
       console.log('Save JSON item complete.');
@@ -59,10 +70,11 @@ export const initializeFileSystemHandlers = () => {
     // console.log("Directory created probably", mkdirResponse);
 
     // Make the file
-    const filePath = currentEpisodeLocation;
+    const filePath = path.resolve(currentEpisodeLocation, EPISODE_FILE);
     const jsonContents = JSON.stringify(episode, null, 2);
     console.log('Writing file', filePath);
     console.log("File's contents are: ", jsonContents);
+
     var writeResponse = await fs.writeFile(filePath, jsonContents);
     console.log('File written probably.', writeResponse);
 
@@ -70,25 +82,29 @@ export const initializeFileSystemHandlers = () => {
   });
 
   ipcMain.handle('file-system-load-episode', async (e: any, episodeLocation: string) => {
-    console.log('Loading episode', {
-      episodeLocation,
-    });
+    if (!episodeLocation) {
+      throw new Error('Episode location is undefined or blank.');
+    }
+    if (episodeLocation.trim().length === 0) {
+      throw new Error('Episode location is blank.');
+    }
 
-    if (!episodeLocation) throw new Error('Episode location is undefined or blank.');
-    if (episodeLocation.trim().length === 0) throw new Error('Episode location is blank.');
+    const episodeFileLocation = path.resolve(episodeLocation, EPISODE_FILE);
+    console.log('Loading episode', episodeFileLocation);
 
-    const exists = fsSync.existsSync(episodeLocation);
-    if (!exists) throw new Error('Episode does not exists.');
+    // Check if episode file exists
+    if (!fsSync.existsSync(episodeFileLocation)) {
+      throw new Error('Episode does not exist.');
+    }
 
     // TODO: If episodeIdentifier isn't a valid path, BOOM!
 
     // Episode Identifier is the path to the file
-    const fullPathToFile = episodeLocation;
     currentEpisodeLocation = episodeLocation;
 
-    console.log('Loading file. ', fullPathToFile);
+    console.log('Loading file. ', episodeFileLocation);
 
-    const data = await fs.readFile(fullPathToFile, 'utf8');
+    const data = await fs.readFile(episodeFileLocation, 'utf8');
 
     console.log('Data from file: ', data);
 
@@ -177,4 +193,12 @@ ipcMain.handle('file-system-load-most-recently-used-items', async (e: any) => {
   // console.log("Data from file: ", data);
 
   // return JSON.parse(data);
+});
+
+ipcMain.handle('file-system-open-dialog', async (_, params) => {
+  return await dialog.showOpenDialog(params);
+});
+
+ipcMain.handle('file-system-save-dialog', async (_, params) => {
+  return await dialog.showSaveDialog(params);
 });

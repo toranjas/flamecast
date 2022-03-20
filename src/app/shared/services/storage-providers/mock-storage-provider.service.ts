@@ -9,7 +9,6 @@ import StorageProvider from './StorageProvider';
 })
 export class MockStorageProviderService implements StorageProvider {
   constructor() {}
-
   createEpisode = async (episodeLocation: string, episodeInfo?: EpisodeInfo) => emptyEpisode();
 
   saveEpisode = async (episode: Episode) => {
@@ -33,5 +32,13 @@ export class MockStorageProviderService implements StorageProvider {
 
   loadMostRecentlyUsedItems = async (): Promise<MostRecentlyUsedItem[]> => {
     return [];
+  };
+
+  openSelectFolderDialog = async (title: string, buttonLabel: string) => {
+    console.log(`Dialog to select folder titled ${title} with button ${buttonLabel}`);
+    return {
+      canceled: false,
+      folder: '/home/',
+    };
   };
 }
