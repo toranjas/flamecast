@@ -41,7 +41,7 @@
             aria-describedby="episodeLocation-help"
             [(ngModel)]="episodeLocation"
           />
-          <button type="button" pButton pRipple styleClass="p-button-warn">Browse</button>
+          <button type="button" pButton pRipple styleClass="p-button-warn" (click)="selectFolder()">Browse</button>
         </div>
         <small id="episodeLocation-help" class="fc-description p-error block">Error placeholder</small>
       </div>
@@ -53,15 +53,16 @@
           pButton
           pRipple
           type="button"
-          [label]="'PAGES.CREATE_EPISODE.CANCEL' | translate"
+          routerLink="/home"
           class="p-button-outlined p-button-rounded p-button-lg"
+          [label]="'PAGES.CREATE_EPISODE.CANCEL' | translate"
         ></button>
         <button
           pButton
           pRipple
           type="button"
-          [label]="'PAGES.CREATE_EPISODE.CREATE' | translate"
           class="p-button-rounded p-button-lg"
+          [label]="'PAGES.CREATE_EPISODE.CREATE' | translate"
           (click)="createEpisode()"
         ></button>
       </div>

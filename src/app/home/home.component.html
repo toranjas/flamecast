@@ -1,17 +1,31 @@
 <app-full-page>
   <section class="grid">
     <div class="col">
-
       <div class="welcome-banner w-full"></div>
-
     </div>
   </section>
 
   <div class="grid">
     <div class="col">
-      <div class="fc-display mt-4">{{ 'PAGES.HOME.TITLE' | translate }}</div>
+      <h1 class="fc-display mt-4">{{ 'PAGES.HOME.TITLE' | translate }}</h1>
 
-      <h1 class="fc-header-1">Header 1</h1>
+      <h2 class="fc-header-2 mt-6">Options</h2>
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Create Episode"
+        class="p-button-rounded p-button-lg"
+        routerLink="create-episode"
+      ></button>
+
+      <h2 class="fc-header-2 mt-6">Most Recently Used</h2>
+      <app-most-recently-used></app-most-recently-used>
+
+      <!-- <a routerLink="/information" class="fc-link">{{ 'PAGES.HOME.GO_TO_DETAIL' | translate }}</a> -->
+      <!-- <br>
+      <a routerLink="create-episode" class="fc-link">Create</a> -->
+      <!-- <h1 class="fc-header-1">Header 1</h1>
       <h2 class="fc-header-2">Header 2</h2>
 
       <div class="fc-menu-item">Menu Item</div>
@@ -19,7 +33,6 @@
 
       <div class="fc-description">Description</div>
 
-      <a routerLink="/information" class="fc-link">{{ 'PAGES.HOME.GO_TO_DETAIL' | translate }}</a>
       <a routerLink="create-episode" class="fc-link">Create New Episode</a>
 
       <div class="p-field">
@@ -36,9 +49,9 @@
 
       <button pButton pRipple type="button" label="Primary" class="p-button-rounded p-button-sm"></button>
       <button pButton pRipple type="button" label="Primary" class="p-button-rounded"></button>
-      <button pButton pRipple type="button" label="Primary" class="p-button-rounded p-button-lg"></button>
+      <button pButton pRipple type="button" label="Primary" class="p-button-rounded p-button-lg"></button> -->
 
-      <hr>
+      <!-- <hr>
       <h2>Shaun's Mocking</h2>
 
 
@@ -62,11 +75,7 @@
         (click)="createEpisode()"></button>
         <button pButton pRipple type="button" label="Load Episode" class="p-button-rounded p-button-lg"
         (click)="loadEpisode()"></button>
-
-
-      <h2>Most Recently Used</h2>
-      <app-most-recently-used></app-most-recently-used>
-
+ -->
     </div>
   </div>
 </app-full-page>
