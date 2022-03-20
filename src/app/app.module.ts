@@ -38,9 +38,7 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
   new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -59,8 +57,8 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
       loader: {
         provide: TranslateLoader,
         useFactory: httpLoaderFactory,
-        deps: [HttpClient]
-      }
+        deps: [HttpClient],
+      },
     }),
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(effects),
@@ -71,9 +69,12 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
   ],
   providers: [
     { provide: 'StorageProvider', useFactory: storageProviderFactory },
-    { provide: 'MediaControlProvider', useClass: WebAudioApiMediaControlProvider }
+    {
+      provide: 'MediaControlProvider',
+      useClass: WebAudioApiMediaControlProvider,
+    },
   ],
   bootstrap: [AppComponent],
-  exports: []
+  exports: [],
 })
 export class AppModule {}

@@ -1,10 +1,11 @@
 import { mediaControlReducer } from '@app/media-control/store/media-control.reducers';
+import { mostRecentlyUsedReducer } from '@app/most-recently-used/store/most-recently-used.reducer';
 import { episodeReducer } from '../../episode/store/episode.reducer';
 
 export const reducers = {
   episode: episodeReducer,
-  mediaControl: mediaControlReducer
-
+  mediaControl: mediaControlReducer,
+  mostRecentlyUsed: mostRecentlyUsedReducer,
   // Most Recently Used
   // History (undo/redo)
   // Recent
@@ -32,13 +33,11 @@ export const reducers = {
   // - MRU is easier in a database. Problem is, most "compact" databases are single user.
   //   Couldn't support multiple flamecast windows connected at once.
 
-
   // Session (transient, non-persistent information for the runtime of the application. E.g. which episode is loaded in this window, which page is currently used.)
 
   // Are Application and Session good names?
   // Obviously, I stole them from HTML5 :-D
   // To me, they are serving the same purpose but maybe the names suck for our intended use.
-
 };
 
 // export const reducers2 = {
@@ -57,5 +56,3 @@ export const reducers = {
 //   segments: segmentsReducer,
 //   parts: partsReducer
 // };
-
-
