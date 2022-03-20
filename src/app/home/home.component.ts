@@ -11,7 +11,9 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  episodeIdentifier = '';
+  // This is temporarily hard-coded for Shaun's benefit
+  episodeIdentifier =
+    '/home/shaun/Documents/podcasts/episode5/episode5.flamecast';
 
   // Initialization
   constructor(private store: Store) {}
