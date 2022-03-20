@@ -17,10 +17,7 @@ export const episodeReducer = createReducer(
 
   //#region Episode
 
-  on(
-    EpisodeActions.loadEpisodeSuccessAction,
-    EpisodeFunctions.loadEpisodeSuccess,
-  ),
+  on(EpisodeActions.loadEpisodeSuccessAction, EpisodeFunctions.loadEpisodeSuccess),
 
   //#endregion
 
@@ -32,10 +29,7 @@ export const episodeReducer = createReducer(
 
   //#region Segments
 
-  on(
-    SegmentActions.changeSegmentPropertiesAction,
-    SegmentFunctions.changeSegmentProperties,
-  ),
+  on(SegmentActions.changeSegmentPropertiesAction, SegmentFunctions.changeSegmentProperties),
   on(SegmentActions.createSegmentAction, SegmentFunctions.createSegment),
   on(SegmentActions.moveSegmentUpAction, SegmentFunctions.moveSegmentUp),
   on(SegmentActions.moveSegmentDownAction, SegmentFunctions.moveSegmentDown),
@@ -44,10 +38,7 @@ export const episodeReducer = createReducer(
 
   //#region Parts
 
-  on(
-    PartActions.changePartPropertiesAction,
-    PartFunctions.changePartProperties,
-  ),
+  on(PartActions.changePartPropertiesAction, PartFunctions.changePartProperties),
   on(PartActions.createPartAction, PartFunctions.createPart),
   on(PartActions.movePartUpAction, PartFunctions.movePartUp),
   on(PartActions.movePartDownAction, PartFunctions.movePartDown),

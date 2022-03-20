@@ -40,9 +40,8 @@ export const emptyEpisode = (): Episode => ({
 // ██   ██ ██   ██ ██   ██ ██   ██    ██         ██               ██      ██    ██ ██   ██ ██   ██
 // ██   ██ ██   ██ ██   ██ ██   ██    ██          ██             ██        ██████  ██████   █████
 
-const arrayOfIds = <T extends OrderableItem>(
-  items: OrderableItemDictionary<T>,
-) => Object.keys(items);
+const arrayOfIds = <T extends OrderableItem>(items: OrderableItemDictionary<T>) =>
+  Object.keys(items);
 
 const arrayOfItems = <T extends OrderableItem>(
   items: OrderableItemDictionary<T>,
@@ -52,9 +51,8 @@ const arrayOfItems = <T extends OrderableItem>(
     .map((id) => items[id])
     .filter((item) => !predicate || predicate(item));
 
-const arrayOfKeyItemPairs = <T extends OrderableItem>(
-  items: OrderableItemDictionary<T>,
-) => Object.keys(items).map((key) => ({ key, item: items[key] }));
+const arrayOfKeyItemPairs = <T extends OrderableItem>(items: OrderableItemDictionary<T>) =>
+  Object.keys(items).map((key) => ({ key, item: items[key] }));
 
 const getArrayOfOrders = <T extends OrderableItem>(
   items: OrderableItemDictionary<T>,
@@ -128,9 +126,7 @@ const itemBefore = <T extends OrderableItem>(
   targetOrder: number,
   predicate?: OrderableItemPredicate<T>,
 ) => {
-  const itemsBefore = arrayOfItems(items, predicate).filter(
-    (item) => item.order < targetOrder,
-  );
+  const itemsBefore = arrayOfItems(items, predicate).filter((item) => item.order < targetOrder);
   const orderBefore = Math.max(...itemsBefore.map((item) => item.order));
   return itemsBefore.find((item) => item.order === orderBefore);
 };
@@ -140,9 +136,7 @@ const itemAfter = <T extends OrderableItem>(
   targetOrder: number,
   predicate?: OrderableItemPredicate<T>,
 ) => {
-  const itemsBefore = arrayOfItems(items, predicate).filter(
-    (item) => item.order > targetOrder,
-  );
+  const itemsBefore = arrayOfItems(items, predicate).filter((item) => item.order > targetOrder);
   const orderBefore = Math.min(...itemsBefore.map((item) => item.order));
   return itemsBefore.find((item) => item.order === orderBefore);
 };
