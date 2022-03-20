@@ -1,0 +1,17 @@
+<table class="styled-table">
+  <thead>
+    <th>Location</th>
+    <th>Last Loaded</th>
+  </thead>
+  <tbody *ngFor="let mru of mostRecentlyUsedItems$ | async;">
+    <tr>
+      <td>{{ mru.episodeLocation }}</td>
+      <td>{{ mru.lastLoaded }}</td>
+      <td><button (click)="loadEpisode(mru.episodeLocation)">Load</button></td>
+    </tr>
+  </tbody>
+</table>
+<button (click)="refreshMostRecentList()">Refresh</button>
+<!-- <ul *ngFor="let mru of mostRecentlyUsedItems$ | async;">
+  <li>{{ mru.episodeLocation }} {{ mru.lastLoaded }} </li>
+</ul> -->
