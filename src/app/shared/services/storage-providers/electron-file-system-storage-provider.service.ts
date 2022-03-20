@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MostRecentlyUsedItem } from '@app/most-recently-used/most-recently-used.models';
-import { Episode } from '../../../episode/episode.models';
-import { emptyEpisode } from '../../../episode/episode.utils';
+import { Episode, EpisodeInfo } from '../../../episode/episode.models';
+import { emptyEpisode, emptyEpisodeInfo } from '../../../episode/episode.utils';
 import StorageProvider from './StorageProvider';
 
 // SH: I had to move this down to the constructor.
@@ -22,8 +22,9 @@ export class ElectronFileSystemStorageProviderService implements StorageProvider
     this.ipcRenderer = ipcRenderer;
   }
 
-  createEpisode = async (episodeLocation: string) => {
-    const newEpisode = emptyEpisode();
+  createEpisode = async (episodeLocation: string, episodeInfo?: EpisodeInfo) => {
+    if (!episodeInfo) episodeInfo = emptyEpisodeInfo();
+    const newEpisode = { ...emptyEpisode(), info: episodeInfo };
     const response = await this.ipcRenderer.invoke(
       'file-system-create-episode',
       episodeLocation,

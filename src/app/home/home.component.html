@@ -50,13 +50,21 @@
         <small id="episode-location-help" class="fc-description">Directory path to the episode.</small>
       </div>
 
+      <div class="p-field">
+        <label for="new-episode-showname" class="fc-body">New Episode Show Name</label>
+        <input id="new-episode-show-name" class="p-inputtext-lg" aria-describedby="new-episode-show-name-help" pInputText
+        [value]="newEpisodeShowName" (input)="newEpisodeShowNameChange($event)"
+           />
+          <small id="new-episode-show-name-help" class="fc-description">This is an example field</small>
+      </div>
+
       <button pButton pRipple type="button" label="Create Episode" class="p-button-rounded p-button-lg"
         (click)="createEpisode()"></button>
         <button pButton pRipple type="button" label="Load Episode" class="p-button-rounded p-button-lg"
         (click)="loadEpisode()"></button>
 
 
-      <h2>Most Recently Used</h2> 
+      <h2>Most Recently Used</h2>
       <app-most-recently-used></app-most-recently-used>
 
     </div>
