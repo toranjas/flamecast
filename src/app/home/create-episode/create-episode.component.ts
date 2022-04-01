@@ -1,8 +1,17 @@
-import { Component, ChangeDetectionStrategy, Inject, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Inject,
+  OnInit,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { createEpisodeAction } from '@app/episode/store/episode.actions';
-import StorageProvider from '@app/shared/services/storage-providers/StorageProvider';
+import StorageProvider from '@app/shared/services/storage-providers/storage-provider';
 import { Router } from '@angular/router';
+import { take, tap } from 'rxjs/operators';
+import { selectIsEpisodeLoaded } from '@app/episode/store/episode.selectors';
+import { WithSubscribe } from '@app/core/mixins/subscription.mixin';
 
 @Component({
   selector: 'app-create-episode',
@@ -10,7 +19,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-episode.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateEpisodeComponent {
+export class CreateEpisodeComponent extends WithSubscribe() implements OnInit {
   episodeName = '';
   episodeLocation = '';
 
@@ -19,17 +28,33 @@ export class CreateEpisodeComponent {
     private router: Router,
     private cdr: ChangeDetectorRef,
     @Inject('StorageProvider') private storageProvider: StorageProvider,
-  ) {}
+  ) {
+    super();
+  }
 
-  async selectFolder() {
-    const result = await this.storageProvider.openSelectFolderDialog(
-      'Select a folder to save your episode',
-      'This one will do',
+  ngOnInit(): void {
+    this.subscriptions.add(
+      this.store
+        .select(selectIsEpisodeLoaded)
+        .subscribe((isLoaded) => this.episodeCreated(isLoaded)),
     );
-    if (!result.canceled) {
-      this.episodeLocation = result.folder;
-      this.cdr.markForCheck();
-    }
+  }
+
+  selectFolder() {
+    const dialog$ = this.storageProvider
+      .openSelectFolderDialog('Select a folder to save your episode', 'This one will do')
+      .pipe(
+        take(1),
+        tap((result) => {
+          if (!result.canceled) {
+            this.episodeLocation = result.folder;
+            this.cdr.markForCheck();
+          }
+        }),
+      )
+      .subscribe();
+
+    this.subscriptions.add(dialog$);
   }
 
   createEpisode() {
@@ -42,7 +67,11 @@ export class CreateEpisodeComponent {
         },
       }),
     );
+  }
 
-    this.router.navigate(['/information']);
+  private episodeCreated(isLoaded: boolean) {
+    if (isLoaded) {
+      this.router.navigate(['/information']);
+    }
   }
 }

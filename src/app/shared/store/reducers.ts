@@ -1,9 +1,10 @@
 import { mediaControlReducer } from '@app/media-control/store/media-control.reducers';
 import { mostRecentlyUsedReducer } from '@app/most-recently-used/store/most-recently-used.reducer';
-import { episodeReducer } from '../../episode/store/episode.reducer';
+import { episodeReducer } from '@app/episode/store/episode.reducer';
+import { EPISODE_STORE } from '@app/episode/episode.consts';
 
 export const reducers = {
-  episode: episodeReducer,
+  [EPISODE_STORE]: episodeReducer,
   mediaControl: mediaControlReducer,
   mostRecentlyUsed: mostRecentlyUsedReducer,
   // Most Recently Used

@@ -19,4 +19,6 @@ export const loadEpisodeSuccessAction = createAction(
   props<{ episode: Episode; episodeLocation: string }>(),
 );
 
+export const saveEpisodeAction = createAction('[Episode] Save');
+
 export const saveEpisodeSuccessAction = createAction('[Episode] Save Success');

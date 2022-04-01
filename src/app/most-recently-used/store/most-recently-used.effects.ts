@@ -1,27 +1,23 @@
 import { Inject, Injectable } from '@angular/core';
 
 // // RxJs
-import { EMPTY, from, OperatorFunction } from 'rxjs';
-import { mergeMap, tap, map, catchError, startWith, pairwise, filter } from 'rxjs/operators';
+import { EMPTY, from } from 'rxjs';
+import { mergeMap, map, catchError } from 'rxjs/operators';
 
 // NgRx
 import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 // Services
-import StorageProvider from '@app/shared/services/storage-providers/StorageProvider';
+import StorageProvider from '@app/shared/services/storage-providers/storage-provider';
 
 // Actions
-import { loadEpisodeSuccessAction } from '../../episode/store/episode.actions';
+import { loadEpisodeSuccessAction } from '@app/episode/store/episode.actions';
 import {
   loadMostRecentlyUsedItemsAction,
   loadMostRecentlyUsedItemsSuccessAction,
   upsertMostRecentlyUsedItemAction,
 } from './most-recently-used.actions';
-
-// import { EpisodeState } from '../episode.models';
-// import { selectEpisodeState } from './episode.selectors';
-// import { episodeHasChanges } from '../episode.utils';
 
 @Injectable()
 export class MostRecentlyUsedEffects {

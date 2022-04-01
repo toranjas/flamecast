@@ -1,8 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
 
+import { WithSubscribe } from '@app/core/mixins/subscription.mixin';
 import { EpisodeInfo } from '@app/episode/episode.models';
 import { selectEpisodeInfo } from '@app/episode/info/store/info.selectors';
 import { changeInfoPropertiesAction } from '@app/episode/info/store/info.actions';
@@ -13,7 +13,7 @@ import { changeInfoPropertiesAction } from '@app/episode/info/store/info.actions
   styleUrls: ['./information.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InformationComponent implements OnInit, OnDestroy {
+export class InformationComponent extends WithSubscribe() implements OnInit {
   /**
    * Auto-save fields might fail, this flag will determine if there is something unsaved
    */
@@ -22,25 +22,20 @@ export class InformationComponent implements OnInit, OnDestroy {
    * UI Model for binding episode info
    */
   episodeInfo: EpisodeInfo;
-  /**
-   * Episode Info subscription from store
-   */
-  private episodeInfo$: Subscription;
 
-  constructor(private store: Store) {}
-
-  ngOnDestroy(): void {
-    // Avoid memory leaks, must unsubscribe
-    this.episodeInfo$.unsubscribe();
+  constructor(private store: Store) {
+    super();
   }
 
   ngOnInit(): void {
-    this.episodeInfo$ = this.store
-      .select(selectEpisodeInfo)
-      .pipe(take(1)) // No need to keep updating
-      .subscribe((episode) => {
-        this.episodeInfo = { ...episode };
-      });
+    this.subscriptions.add(
+      this.store
+        .select(selectEpisodeInfo)
+        .pipe(take(1)) // No need to keep updating
+        .subscribe((episode) => {
+          this.episodeInfo = { ...episode };
+        }),
+    );
   }
 
   updateInfo() {
