@@ -54,10 +54,7 @@ export class PcmFloat32Samples {
    * @param inputR Array of audio data from the Right channel
    * @returns A single interleaved array that alternates between data from Left and Right
    */
-  static interleave = (
-    leftSamples: Float32Array,
-    rightSamples: Float32Array,
-  ): Float32Array => {
+  static interleave = (leftSamples: Float32Array, rightSamples: Float32Array): Float32Array => {
     const length = leftSamples.length + rightSamples.length;
     const result = new Float32Array(length);
 

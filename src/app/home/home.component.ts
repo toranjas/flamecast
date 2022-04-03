@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  createEpisodeAction,
-  loadEpisodeAction,
-} from '@app/episode/store/episode.actions';
+import { createEpisodeAction, loadEpisodeAction } from '@app/episode/store/episode.actions';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -38,9 +35,7 @@ export class HomeComponent implements OnInit {
   };
 
   loadEpisode = async () => {
-    await this.store.dispatch(
-      loadEpisodeAction({ episodeLocation: this.episodeIdentifier }),
-    );
+    await this.store.dispatch(loadEpisodeAction({ episodeLocation: this.episodeIdentifier }));
   };
 
   newEpisodeShowNameChange = ($event: any) => {

@@ -14,12 +14,12 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'home',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: '**',
-    component: PageNotFoundComponent
-  }
+    component: PageNotFoundComponent,
+  },
 ];
 
 @NgModule({
@@ -33,6 +33,6 @@ const routes: Routes = [
     PublishRoutingModule,
     SettingsModule,
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

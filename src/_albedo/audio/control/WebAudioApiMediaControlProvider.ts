@@ -128,16 +128,10 @@ export class WebAudioApiMediaControlProvider implements MediaControlProvider {
 
     // Set it to the videoElement. This is what allows us to change the output.
     if (!this._outputVideoElement) {
-      console.log(
-        `Creating reference to video element "${this.videoComponentSelector}"`,
-      );
-      this._outputVideoElement = document.querySelector(
-        this.videoComponentSelector,
-      );
+      console.log(`Creating reference to video element "${this.videoComponentSelector}"`);
+      this._outputVideoElement = document.querySelector(this.videoComponentSelector);
       if (!this._outputVideoElement) {
-        throw new Error(
-          `video element "${this.videoComponentSelector}" not defined.`,
-        );
+        throw new Error(`video element "${this.videoComponentSelector}" not defined.`);
       }
     }
 
@@ -178,14 +172,9 @@ export class WebAudioApiMediaControlProvider implements MediaControlProvider {
 
     // Build Nodes
     console.log('Building nodes.');
-    this._inputNode =
-      this._audioContext.createMediaStreamSource(inputMediaStream);
+    this._inputNode = this._audioContext.createMediaStreamSource(inputMediaStream);
     this._inputGainNode = this._audioContext.createGain();
-    this._inputScriptProcessorNode = this._audioContext.createScriptProcessor(
-      4096 * 2,
-      2,
-      2,
-    );
+    this._inputScriptProcessorNode = this._audioContext.createScriptProcessor(4096 * 2, 2, 2);
     this._inputScriptProcessorNodeZeroGain = this._audioContext.createGain();
     this._inputScriptProcessorNodeZeroGain.gain.value = 0;
 
@@ -202,9 +191,7 @@ export class WebAudioApiMediaControlProvider implements MediaControlProvider {
     console.log('Connecting nodes.');
     this._inputNode.connect(this._inputGainNode);
     this._inputGainNode.connect(this._inputScriptProcessorNode);
-    this._inputScriptProcessorNode.connect(
-      this._inputScriptProcessorNodeZeroGain,
-    );
+    this._inputScriptProcessorNode.connect(this._inputScriptProcessorNodeZeroGain);
     this._inputScriptProcessorNodeZeroGain.connect(this._outputNode);
 
     // Configure Nodes
@@ -242,8 +229,7 @@ export class WebAudioApiMediaControlProvider implements MediaControlProvider {
 
     // Create a new input media stream and new inputNode
     const inputMediaStream = await this.getInputMediaStream();
-    this._inputNode =
-      this._audioContext.createMediaStreamSource(inputMediaStream);
+    this._inputNode = this._audioContext.createMediaStreamSource(inputMediaStream);
 
     // Hook the new inputNode instance
     this._inputNode.connect(this._inputGainNode);
@@ -251,10 +237,7 @@ export class WebAudioApiMediaControlProvider implements MediaControlProvider {
 
   private setupOutputElement = async () => {
     if (this._outputVideoElement) {
-      await MediaControlUtils.attachSinkId(
-        this._outputVideoElement,
-        this._audioOutputId,
-      );
+      await MediaControlUtils.attachSinkId(this._outputVideoElement, this._audioOutputId);
     } else {
       console.log('Could not setup output element. output element is null.');
     }
@@ -266,18 +249,14 @@ export class WebAudioApiMediaControlProvider implements MediaControlProvider {
     // Stop any currently running stream.
     if (this._runningInputMediaStream) {
       console.log('Stopping current.');
-      this._runningInputMediaStream
-        .getTracks()
-        .forEach((track) => track.stop());
+      this._runningInputMediaStream.getTracks().forEach((track) => track.stop());
       this._runningInputMediaStream = null;
     }
 
     // Build the constraints
     const constraints: MediaStreamConstraints = {
       audio: {
-        deviceId: this._audioInputId
-          ? { exact: this._audioInputId }
-          : undefined,
+        deviceId: this._audioInputId ? { exact: this._audioInputId } : undefined,
         // Trying to reduce latency
         latency: 0.02,
         echoCancellation: false,
@@ -287,9 +266,7 @@ export class WebAudioApiMediaControlProvider implements MediaControlProvider {
 
     // Get the media
     console.log('Getting media stream.');
-    this._runningInputMediaStream = await navigator.mediaDevices.getUserMedia(
-      constraints,
-    );
+    this._runningInputMediaStream = await navigator.mediaDevices.getUserMedia(constraints);
 
     // Done
     return this._runningInputMediaStream;

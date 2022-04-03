@@ -4,6 +4,5 @@ import { compareMostRecentlyUsedItem } from '../most-recently-used.utils';
 
 export const selectMostRecentlyUsedItems = createSelector(
   createFeatureSelector('mostRecentlyUsed'),
-  (state: Array<MostRecentlyUsedItem>) =>
-    [...state].sort(compareMostRecentlyUsedItem),
+  (state: Array<MostRecentlyUsedItem>) => [...state].sort(compareMostRecentlyUsedItem),
 );

@@ -1,59 +1,74 @@
 <app-project-page>
-  <h1 class="fc-display">
-    Episode Information
-  </h1>
+  <h1 class="fc-display">Episode Information</h1>
 
-  <a routerLink="/" class="fc-link">{{ 'PAGES.DETAIL.BACK_TO_HOME' | translate }}</a>
+  <a routerLink="/home" class="fc-link">{{ 'PAGES.DETAIL.BACK_TO_HOME' | translate }}</a>
 
-  <div class="p-field">
-    <label for="show-name" class="fc-body">Show Name</label>
-    <input id="show-name" class="p-inputtext-lg" aria-describedby="show-name-help" pInputText
-      [value]="(episodeInfo$ | async).showName" (input)="setShowName($event)" />
-    <small id="show-name-help" class="fc-description">The name of the show.</small>
-  </div>
+  <div *ngIf="episodeInfo">
 
-  <div class="p-field">
-    <label for="title" class="fc-body">Title</label>
-    <input id="title" class="p-inputtext-lg" aria-describedby="title-help" pInputText
-      [value]="(episodeInfo$ | async).title" (input)="setTitle($event)" />
-    <small id="title-help" class="fc-description">The title of the episode.</small>
-  </div>
+    <div class="p-field">
+      <label for="show-name" class="fc-body">Show Name</label>
+      <input id="show-name" class="p-inputtext-lg" aria-describedby="show-name-help" pInputText
+        [(ngModel)]="episodeInfo.showName"
+        (blur)="updateInfo()"
+      />
+      <small id="show-name-help" class="fc-description">The name of the show.</small>
+    </div>
 
-  <div class="p-field">
-    <label for="episode-number" class="fc-body">Episode Number</label>
-    <input id="episode-number" class="p-inputtext-lg" aria-describedby="episode-number-help" pInputText
-      [value]="(episodeInfo$ | async).episodeNumber" (input)="setEpisodeNumber($event)" />
-    <small id="episode-number-help" class="fc-description">The number of the episode.</small>
-  </div>
+    <div class="p-field">
+      <label for="title" class="fc-body">Title</label>
+      <input id="title" class="p-inputtext-lg" aria-describedby="title-help" pInputText
+        [(ngModel)]="episodeInfo.title"
+        (blur)="updateInfo()"
+      />
+      <small id="title-help" class="fc-description">The title of the episode.</small>
+    </div>
 
-  <!-- TODO: releaseDate: Date | undefined; -->
+    <div class="p-field">
+      <label for="episode-number" class="fc-body">Episode Number</label>
+      <input id="episode-number" class="p-inputtext-lg" aria-describedby="episode-number-help" pInputText
+        [(ngModel)]="episodeInfo.episodeNumber"
+        (blur)="updateInfo()"
+      />
+      <small id="episode-number-help" class="fc-description">The number of the episode.</small>
+    </div>
 
-  <div class="p-field">
-    <label for="description" class="fc-body">Description</label>
-    <input id="description" class="p-inputtext-lg" aria-describedby="description-help" pInputText
-      [value]="(episodeInfo$ | async).description" (input)="setDescription($event)" />
-    <small id="description-help" class="fc-description">The description of the episode.</small>
-  </div>
+    <!-- TODO: releaseDate: Date | undefined; -->
 
-  <div class="p-field">
-    <label for="author" class="fc-body">Author(s)</label>
-    <input id="author" class="p-inputtext-lg" aria-describedby="author-help" pInputText
-      [value]="(episodeInfo$ | async).author" (input)="setAuthor($event)" />
-    <small id="author-help" class="fc-description">The author(s) of the episode.</small>
-  </div>
+    <div class="p-field">
+      <label for="description" class="fc-body">Description</label>
+      <input id="description" class="p-inputtext-lg" aria-describedby="description-help" pInputText
+        [(ngModel)]="episodeInfo.description"
+        (blur)="updateInfo()"
+      />
+      <small id="description-help" class="fc-description">The description of the episode.</small>
+    </div>
 
-  <div class="p-field">
-    <label for="category" class="fc-body">Category</label>
-    <input id="category" class="p-inputtext-lg" aria-describedby="category-help" pInputText
-      [value]="(episodeInfo$ | async).category" (input)="setCategory($event)" />
-    <small id="category-help" class="fc-description">The category of the episode.</small>
-  </div>
+    <div class="p-field">
+      <label for="author" class="fc-body">Author(s)</label>
+      <input id="author" class="p-inputtext-lg" aria-describedby="author-help" pInputText
+        [(ngModel)]="episodeInfo.author"
+        (blur)="updateInfo()"
+      />
+      <small id="author-help" class="fc-description">The author(s) of the episode.</small>
+    </div>
 
-  <div class="p-field">
-    <label for="copyright" class="fc-body">Copyright</label>
-    <input id="copyright" class="p-inputtext-lg" aria-describedby="copyright-help" pInputText
-      [value]="(episodeInfo$ | async).copyright" (input)="setCopyright($event)" />
-    <small id="copyright-help" class="fc-description">The copyright of the episode.</small>
+    <div class="p-field">
+      <label for="category" class="fc-body">Category</label>
+      <input id="category" class="p-inputtext-lg" aria-describedby="category-help" pInputText
+        [(ngModel)]="episodeInfo.category"
+        (blur)="updateInfo()"
+      />
+     <small id="category-help" class="fc-description">The category of the episode.</small>
+    </div>
+
+    <div class="p-field">
+      <label for="copyright" class="fc-body">Copyright</label>
+      <input id="copyright" class="p-inputtext-lg" aria-describedby="copyright-help" pInputText
+        [(ngModel)]="episodeInfo.copyright"
+        (blur)="updateInfo()"
+      />
+      <small id="copyright-help" class="fc-description">The copyright of the episode.</small>
+    </div>
   </div>
 
 </app-project-page>

@@ -1,0 +1,33 @@
+:host {
+  .banner {
+    height: 250px;
+    background-size: cover;
+    border-radius: 12px;
+    background-image: url(https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470);
+  }
+
+  .cta-tray {
+    display: flex;
+    justify-content: flex-end;
+
+    > * {
+      margin-left: 1.5rem;
+    }
+  }
+
+  .p-field {
+    > * {
+      width: 50%;
+    }
+    &.long {
+      > * {
+        width: 75%;
+      }
+    }
+    &.fill {
+      > * {
+        width: 100%;
+      }
+    }
+  }
+}

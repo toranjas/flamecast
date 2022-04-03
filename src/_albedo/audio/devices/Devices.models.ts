@@ -9,6 +9,6 @@ export interface DeviceBase {
   name: string;
 }
 
-export interface InputDevice extends DeviceBase {}
+export type InputDevice = DeviceBase;
 
-export interface OutputDevice extends DeviceBase {}
+export type OutputDevice = DeviceBase;

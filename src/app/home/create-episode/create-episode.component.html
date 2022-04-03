@@ -1,0 +1,72 @@
+<app-full-page>
+  <section class="grid">
+    <div class="col">
+      <div class="banner w-full"></div>
+    </div>
+  </section>
+
+  <div class="grid">
+    <div class="col">
+      <h1 class="fc-display mt-4" [innerText]="'PAGES.CREATE_EPISODE.TITLE' | translate"></h1>
+      <h2 class="fc-header-2" [innerText]="'PAGES.CREATE_EPISODE.DESCRIPTION' | translate"></h2>
+
+      <div class="p-field mt-8">
+        <label
+          for="episodeName"
+          class="fc-body block"
+          [innerText]="'PAGES.CREATE_EPISODE.NAME_LABEL' | translate"
+        ></label>
+        <input
+          pInputText
+          id="episodeName"
+          class="p-inputtext-lg block"
+          aria-describedby="episodeName-help"
+          [(ngModel)]="episodeName"
+        />
+        <small id="episodeName-help" class="fc-description p-error block">Error placeholder</small>
+      </div>
+
+      <div class="p-field long mt-6">
+        <label
+          for="episodeLocation"
+          class="fc-body"
+          [innerText]="'PAGES.CREATE_EPISODE.PATH_LABEL' | translate"
+        ></label>
+        <div class="p-inputgroup">
+          <input
+            pInputText
+            id="episodeLocation"
+            readonly="readonly"
+            class="p-inputtext-lg"
+            aria-describedby="episodeLocation-help"
+            [(ngModel)]="episodeLocation"
+          />
+          <button type="button" pButton pRipple styleClass="p-button-warn" (click)="selectFolder()">Browse</button>
+        </div>
+        <small id="episodeLocation-help" class="fc-description p-error block">Error placeholder</small>
+      </div>
+
+      <p-divider class="mx-8"></p-divider>
+
+      <div class="cta-tray">
+        <button
+          pButton
+          pRipple
+          type="button"
+          routerLink="/home"
+          class="p-button-outlined p-button-rounded p-button-lg"
+          [label]="'PAGES.CREATE_EPISODE.CANCEL' | translate"
+        ></button>
+        <button
+          pButton
+          pRipple
+          type="button"
+          class="p-button-rounded p-button-lg"
+          [label]="'PAGES.CREATE_EPISODE.CREATE' | translate"
+          (click)="createEpisode()"
+        ></button>
+      </div>
+
+    </div>
+  </div>
+</app-full-page>

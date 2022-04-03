@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { MostRecentlyUsedItem } from '@app/most-recently-used/most-recently-used.models';
-import { Episode, EpisodeInfo } from '../../../episode/episode.models';
-import { emptyEpisode, emptyEpisodeInfo } from '../../../episode/episode.utils';
-import StorageProvider from './StorageProvider';
+import { Episode, EpisodeInfo } from '@app/episode/episode.models';
+import { emptyEpisode, emptyEpisodeInfo } from '@app/episode/episode.utils';
+import StorageProvider from './storage-provider';
 
 @Injectable({
   providedIn: 'root',
@@ -10,16 +11,20 @@ import StorageProvider from './StorageProvider';
 export class MockStorageProviderService implements StorageProvider {
   constructor() {}
 
-  createEpisode = async (episodeLocation: string, episodeInfo?: EpisodeInfo) =>
-    emptyEpisode();
+  createEpisode(
+    _episodeLocation: string,
+    _episodeInfo?: EpisodeInfo,
+  ): Observable<Episode | undefined> {
+    return of(emptyEpisode());
+  }
 
-  saveEpisode = async (episode: Episode) => {
-    // Do nothing
-  };
+  saveEpisode(episode: Episode): Observable<void> {
+    return of(undefined);
+  }
 
-  loadEpisode = async (episodeLocation: string) =>
+  loadEpisode(episodeLocation: string): Observable<Episode | undefined> {
     // SH: Feel free to add any mock data you want here that makes it easier to build the UI.
-    ({
+    return of({
       id: 'MOCK_EPISODE',
       info: emptyEpisodeInfo(),
       segments: {},
@@ -27,12 +32,24 @@ export class MockStorageProviderService implements StorageProvider {
       slides: {},
       takes: {},
     });
+  }
 
-  saveMostRecentlyUsedItem = async (item: MostRecentlyUsedItem) => {
-    // Do nothing
-  };
+  saveMostRecentlyUsedItem(item: MostRecentlyUsedItem): Observable<void> {
+    return of(undefined);
+  }
 
-  loadMostRecentlyUsedItems = async (): Promise<MostRecentlyUsedItem[]> => {
-    return [];
-  };
+  loadMostRecentlyUsedItems(): Observable<MostRecentlyUsedItem[]> {
+    return of([]);
+  }
+
+  openSelectFolderDialog(
+    title: string,
+    buttonLabel: string,
+  ): Observable<{ canceled: boolean; folder: string }> {
+    console.log(`Dialog to select folder titled ${title} with button ${buttonLabel}`);
+    return of({
+      canceled: false,
+      folder: '/home/',
+    });
+  }
 }

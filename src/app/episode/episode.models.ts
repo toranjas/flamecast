@@ -7,9 +7,7 @@ export interface OrderableItemDictionary<T extends OrderableItem> {
   [id: string]: T;
 }
 
-export type OrderableItemPredicate<T extends OrderableItem> = (
-  item: T,
-) => boolean;
+export type OrderableItemPredicate<T extends OrderableItem> = (item: T) => boolean;
 
 export interface Episode {
   id: string;

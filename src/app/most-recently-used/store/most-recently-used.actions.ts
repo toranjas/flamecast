@@ -6,9 +6,7 @@ export const upsertMostRecentlyUsedItemAction = createAction(
   props<MostRecentlyUsedItem>(),
 );
 
-export const loadMostRecentlyUsedItemsAction = createAction(
-  '[Most Recently Used] Load Items',
-);
+export const loadMostRecentlyUsedItemsAction = createAction('[Most Recently Used] Load Items');
 
 export const loadMostRecentlyUsedItemsSuccessAction = createAction(
   '[Most Recently Used] Load Items Success',

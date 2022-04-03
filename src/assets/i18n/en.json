@@ -7,6 +7,20 @@
     "DETAIL": {
       "TITLE": "Detail page!",
       "BACK_TO_HOME": "Back to Home"
+    },
+    "CREATE_EPISODE": {
+      "TITLE": "Creating your new Episode",
+      "DESCRIPTION": "You will be able to add more details later",
+      "CREATE": "Create",
+      "CANCEL": "Go Back",
+      "NAME_LABEL": "Name of your episode",
+      "NAME_INFO": "This is the name that will show on playlists that will differentiate one episode from another.",
+      "NAME_ERRORS.REQUIRED": "Episode name is required.",
+      "PATH_LABEL": "Choose a location to save",
+      "PATH_INFO": "FlameCast will save all your files in the location you specified. It is recommended to have one location for each episode.",
+      "PATH_ERRORS.REQUIRED": "An episode location is required.",
+      "PATH_ERRORS.NOT_FOUND": "This location does not exist or is not accessible.",
+      "PATH_ERRORS.IO": "FlameCast cannot write in this location."
     }
   },
   "SIDENAV": {

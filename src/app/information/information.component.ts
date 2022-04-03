@@ -1,8 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { selectEpisodeInfo } from '@app/episode/info/store/info.selectors';
-import { emptyEpisodeInfo } from '@app/episode/episode.utils';
 import { Store } from '@ngrx/store';
-import { startWith, tap } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
+
+import { WithSubscribe } from '@app/core/mixins/subscription.mixin';
+import { EpisodeInfo } from '@app/episode/episode.models';
+import { selectEpisodeInfo } from '@app/episode/info/store/info.selectors';
 import { changeInfoPropertiesAction } from '@app/episode/info/store/info.actions';
 
 @Component({
@@ -11,51 +13,33 @@ import { changeInfoPropertiesAction } from '@app/episode/info/store/info.actions
   styleUrls: ['./information.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InformationComponent implements OnInit {
-  episodeInfo$ = this.store.select(selectEpisodeInfo).pipe(
-    tap((value) => console.log('Episode Info', value)),
-    startWith(emptyEpisodeInfo()),
-    tap((value) => console.log('Episode Info', value)),
-  );
+export class InformationComponent extends WithSubscribe() implements OnInit {
+  /**
+   * Auto-save fields might fail, this flag will determine if there is something unsaved
+   */
+  isPendingUpdates = false;
+  /**
+   * UI Model for binding episode info
+   */
+  episodeInfo: EpisodeInfo;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store) {
+    super();
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.subscriptions.add(
+      this.store
+        .select(selectEpisodeInfo)
+        .pipe(take(1)) // No need to keep updating
+        .subscribe((episode) => {
+          this.episodeInfo = { ...episode };
+        }),
+    );
+  }
 
-  setShowName = ($event: any) => {
-    this.store.dispatch(
-      changeInfoPropertiesAction({ showName: $event.target.value }),
-    );
-  };
-  setTitle = ($event: any) => {
-    this.store.dispatch(
-      changeInfoPropertiesAction({ title: $event.target.value }),
-    );
-  };
-  // releaseDate: Date | undefined;
-  setEpisodeNumber = ($event: any) => {
-    this.store.dispatch(
-      changeInfoPropertiesAction({ episodeNumber: $event.target.value }),
-    );
-  };
-  setDescription = ($event: any) => {
-    this.store.dispatch(
-      changeInfoPropertiesAction({ description: $event.target.value }),
-    );
-  };
-  setAuthor = ($event: any) => {
-    this.store.dispatch(
-      changeInfoPropertiesAction({ author: $event.target.value }),
-    );
-  };
-  setCategory = ($event: any) => {
-    this.store.dispatch(
-      changeInfoPropertiesAction({ category: $event.target.value }),
-    );
-  };
-  setCopyright = ($event: any) => {
-    this.store.dispatch(
-      changeInfoPropertiesAction({ copyright: $event.target.value }),
-    );
-  };
+  updateInfo() {
+    // TODO: Must validate before saving (eg.: If there are)
+    this.store.dispatch(changeInfoPropertiesAction(this.episodeInfo));
+  }
 }

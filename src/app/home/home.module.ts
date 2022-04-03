@@ -3,15 +3,17 @@ import { CommonModule } from '@angular/common';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { DividerModule } from 'primeng/divider';
 
 import { SharedModule } from '@app/shared/shared.module';
 import { FullPageModule } from '@app/layout/full-page/full-page.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
+import { CreateEpisodeComponent } from './create-episode/create-episode.component';
 import { MostRecentlyUsedComponent } from '@app/most-recently-used/components/most-recently-used.component';
 
 @NgModule({
-  declarations: [HomeComponent, MostRecentlyUsedComponent],
+  declarations: [HomeComponent, CreateEpisodeComponent, MostRecentlyUsedComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -20,6 +22,7 @@ import { MostRecentlyUsedComponent } from '@app/most-recently-used/components/mo
     InputTextModule,
     CheckboxModule,
     ButtonModule,
+    DividerModule,
   ],
 })
 export class HomeModule {}
